@@ -1,0 +1,156 @@
+main {
+    height: 100vh;
+    width: 100%;
+    margin:0;
+    padding:0;
+    background-color: #eef4ed;
+  }
+  
+  .container {
+    height: 100vh;
+    width: 100% !important;
+    padding: 0;
+    margin: 0;
+  }
+  
+  mat-sidenav {
+    width: 150px;
+    height: 100px;
+  }
+  
+  .mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+    right: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    align-items: flex-start;
+    height:10%;
+    background-color:indigo
+
+
+
+  }
+  
+  .spacer {
+    flex: 1;
+  }
+  
+  /* mat list items */
+  .nav-list {
+    width: 250px;
+    padding: 20px 0;
+    padding-right: 10px;
+    padding-left: 10px;
+    height: 97.25% !important;
+    padding-top: 0 !important;
+    background-color: indigo;
+  }
+  
+  .nav-list-item {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    height: 200px;
+    margin-top: 5px;
+    background-color: indigo;
+    padding:0;
+    margin:0;
+  }
+  .display{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    width:100%;
+    height:100%;
+    margin:0;
+    background-color: indigo;
+    border:none;
+  }
+  .display:hover{
+    background-color: purple;
+  }
+  .display:hover>div{
+    background-color: purple;
+  }
+  .display>button{
+    background-color: indigo;
+  }
+  .display>div{
+    padding-top:20px;
+    color:white;
+    background-color: indigo;
+  }
+  
+  .nav-list-icon {
+    color: white!important;
+    margin-right: 10px;
+    font-size: 25px;
+    height: 30px;
+    width: 30px;
+    padding-top: 10px;
+  }
+  
+  .nav-list-text {
+    color: white;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    padding-bottom: 12px;
+    font-weight: bold;
+    height: 20px;
+
+  }
+  
+  .nav-list-text > h2 {
+    font-size: 5px;
+  }
+  
+  @media (min-width: 600px) {
+    .menu-icon {
+      display: none;
+    }
+  }
+  
+  .nav-list-item.active-link {
+    background-color: indigo
+
+
+ !important;
+  }
+  
+  img {
+    width: 250px;
+    height: 200px;
+  }
+  
+  .content {
+    margin: 0;
+    padding:20px
+  }
+  mat-menu{
+    border-radius: 50%;
+    background-color:indigo
+
+
+;
+  }
+  .iconer{
+    border-radius: 50%;
+    border:none;
+  }
+  .iconer:hover{
+    background-color:indigo;
+  }
+.custon-toolbar{
+    padding-top:10px !important;
+}
+  .custom-toolbar>button{
+    background-color: indigo;
+    border:none;
+  }
+  .custom-toolbar>button>mat-icon{
+    color:white;
+    font-size:24px;
+  }

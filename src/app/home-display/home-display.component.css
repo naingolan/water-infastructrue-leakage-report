@@ -1,0 +1,15 @@
+.add-button{
+    width: 80%;
+    margin:auto;
+    background-color: indigo;
+    height:50px;
+    color:white;
+    border:none;
+    border-radius:10px;
+}
+.add-button:hover{
+    background-color: purple;
+}
+h2{
+    color:indigo
+}

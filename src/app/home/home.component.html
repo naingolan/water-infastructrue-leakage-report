@@ -1,0 +1,63 @@
+<main>
+      <mat-drawer-container class="container">
+        <mat-drawer #sidenav [mode]="isScreenSmall ? 'over' : 'side'" [opened]="!isScreenSmall">
+            <mat-nav-list class="nav-list">
+                <img src="assets/smartefd.png">
+                <a mat-list-item class="nav-list-item" routerLink="/receipt">
+                    <button mat-icon-button class="display">
+                      <mat-icon class="nav-list-icon">home</mat-icon>
+                      <div class="nav-list-text">Home</div>
+                    </button>
+                  </a>
+
+                <a mat-list-item class="nav-list-item" routerLink="/receipt">
+                  <button mat-button-toggle class="display">
+                    <mat-icon class="nav-list-icon">receipt</mat-icon>
+                    <div class="nav-list-text">My Problems</div>
+                  </button>
+                </a>
+
+                <a mat-list-item class="nav-list-item" routerLink="/receipt">
+                    <button mat-icon-button class="display">
+                      <mat-icon class="nav-list-icon">bar_chart</mat-icon>
+                      <div class="nav-list-text">Reports</div>
+                    </button>
+                </a>
+
+                <a mat-list-item class="nav-list-item" routerLink="/receipt">
+                    <button mat-icon-button class="display">
+                      <mat-icon class="nav-list-icon">info</mat-icon>
+                      <div class="nav-list-text">About</div>
+                    </button>
+                </a>
+                <a mat-list-item class="nav-list-item" routerLink="/receipt">
+                    <button mat-icon-button class="display">
+                      <mat-icon class="nav-list-icon">account_circle</mat-icon>
+                      <div class="nav-list-text">Account</div>
+                    </button>
+                </a>
+                              </mat-nav-list>
+              
+        </mat-drawer>
+        <mat-toolbar color="primary" class="custom-toolbar">
+          <button  mat-button-toggle (click)="sidenav.toggle()">
+            <mat-icon color="white">menu</mat-icon>
+          </button>
+          <span class="spacer"></span>
+          <button mat-icon-button [matMenuTriggerFor]="languageMenu">
+            <mat-icon color="white">language</mat-icon>
+          </button>
+          <mat-menu #languageMenu="matMenu">
+            
+          </mat-menu>
+          <button mat-icon-button (click)="openUserOptions()">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+        </mat-toolbar>
+        <div class="content">
+            <app-home-display></app-home-display>
+          <router-outlet></router-outlet>
+        </div>
+      </mat-drawer-container>
+    </main>
+  
