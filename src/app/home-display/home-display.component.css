@@ -1,15 +1,106 @@
 .add-button{
-    width: 80%;
-    margin:auto;
-    background-color: indigo;
+    width: 100%;
+    margin:4vh auto;
+    background-color: white;
     height:50px;
-    color:white;
+    color:var(--color);
     border:none;
     border-radius:10px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
 .add-button:hover{
     background-color: purple;
 }
 h2{
-    color:indigo
+    color:var(--color)
+}
+main{
+    background-color:none;
+    padding:0 5vw;
+    height: 100%;;
+}
+
+
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    box-shadow: var(--box-shadow);
+    border-radius: 20px;
+    padding:20px;
+  }
+tbody{
+    border-radius: 20px;
+}
+  
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: var(--color);
+    text-align: center;
+    padding:20px;
+  }
+  td{
+    background-color: white;
+    color:var(--color);
+    text-align: center;
+    padding:0;
+    margin:0;
+  }
+  
+  td img {
+    width: 75px;
+    height: 75px;
+    border-radius: 10px;
+    margin:5px 0;
+  }
+  
+  td.status-pending {
+    color: red;
+  }
+  
+  td.status-complete {
+    color: green;
+  }
+  
+  .problem-form{
+    background-color: white;
+    border-radius: 20px;
+    padding:20px;
+    height: fit-content;
+    box-shadow: var(--box-shadow);
+
+  }
+  form>button{
+    width:30%;
+    border:none;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    background-color: var(--color);
+    color:white;
+    height: 40px;
+    margin-left:60%;
+}
+mat-form-field{
+    margin:20px;
+
+}
+mat-form-field>input{
+    background-color:var(--color)!important;
+    color:var(--color)!important;
+}
+.file-input{
+    margin-left:20px;
+}
+
+
+
+.preview-image>img{
+    width:300px;
+    height: 300px;
+    border-radius: 10px;
 }

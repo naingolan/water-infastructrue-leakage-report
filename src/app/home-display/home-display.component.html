@@ -1,7 +1,60 @@
 <main>
-    <h2>Report a problem</h2>
-    <button mat-icon-button class="add-button">
+    <div class="add-problem">
+      <h2>Report a problem</h2>
+      <button mat-icon-button class="add-button" (click)="toggleForm()">
         <mat-icon>add</mat-icon>
-    </button>
-      
-</main>
+      </button>      
+    </div>
+    <div class="problem-form" *ngIf="showForm">
+      <h2>Enter Problem Details</h2>
+      <form [formGroup]="problemForm" (ngSubmit)="addProblem()">
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Location" formControlName="location">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Reporter" formControlName="reporter">
+        </mat-form-field>
+        <div class="file-input">
+            <div class="file-input-label">
+              <input type="file" (change)="handleImageInput($event)" accept="image/*">
+              <span>Select Image</span>
+            </div>
+            <mat-hint>Please select an image file.</mat-hint>
+          </div>
+                    
+        <div class="preview-image" *ngIf="problemForm.controls['imageSrc'].value">
+          <img [src]="problemForm.controls['imageSrc'].value" alt="Preview Image">
+        </div>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="problem-list">
+      <h2>Problems List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Location</th>
+            <th>Reporter</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pothole of problems">
+            <td>{{ pothole.id }}</td>
+            <td><img [src]="pothole.imageSrc" alt=""></td>
+            <td>{{ pothole.name }}</td>
+            <td>{{ pothole.location }}</td>
+            <td>{{ pothole.reporter }}</td>
+            <td>{{ pothole.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  
