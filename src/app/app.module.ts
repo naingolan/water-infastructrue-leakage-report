@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,15 +22,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { HomeDisplayComponent } from './home-display/home-display.component';
 import { ProblemDialogComponent } from './problem-dialog/problem-dialog.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { LoginComponent } from './login/login.component';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HomeDisplayComponent,
-    ProblemDialogComponent
+    ProblemDialogComponent,
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
+    HttpClientModule,
     MatListModule,
     MatMenuModule,
     BrowserModule,

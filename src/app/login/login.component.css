@@ -1,0 +1,81 @@
+main{
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    width:100vw!important;
+    height:100%!important;
+    background-color:white;
+}
+main>form{
+    position:relative;
+    margin: 0% 30%;
+    border:1px solid #00008B;
+    border-radius:10px;
+    padding:3%;
+    color:#00008B
+}
+main>form{
+    display: flex;
+    flex-direction:column;
+}
+button{
+    width:50%;
+    margin: 10px 20px;
+    margin-left:30px;
+    background-color: #00008B;
+    width: 25vw;
+    height: 40px;
+    border:none;
+    border-radius: 10px;
+    color:white;
+}
+button:hover, button:active{
+    background-color: var(--color);
+}
+a{
+    text-decoration:none;
+    color:#00008B;
+    margin: 2% auto;
+}
+a:hover{
+    color:dark#00008B;
+}
+
+input{
+    background-color: #00008B !important;
+    color:#00008B !important;
+    border: 1px solid #00008B !important;
+}
+/* Example color definitions */
+.custom-input {
+    color: #00008B;
+    background-color: #00008B;
+  }
+.custom-mat{
+    color:#00008B;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+
+}
+  
+input{
+    width:30vw;
+    height:30px;
+    border-radius: 10px;
+    border:1px solid #00008B;
+    background-color: white!important;
+}
+
+.upper-logo{
+    margin-top:30px;
+    width:20%;
+    height: 30vh;
+    align-self: center;
+    margin-left:40%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding:0;
+}

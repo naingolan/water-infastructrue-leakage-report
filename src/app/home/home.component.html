@@ -36,7 +36,7 @@
                       <div class="nav-list-text">Account</div>
                     </button>
                 </a>
-                              </mat-nav-list>
+                </mat-nav-list>
               
         </mat-drawer>
         <mat-toolbar color="primary" class="custom-toolbar">
@@ -51,12 +51,11 @@
             
           </mat-menu>
           <button mat-icon-button (click)="openUserOptions()">
-            <mat-icon>account_circle</mat-icon>
+            <mat-icon>exit_to_app</mat-icon>
           </button>
         </mat-toolbar>
         <div class="content">
             <app-home-display></app-home-display>
-          <router-outlet></router-outlet>
         </div>
       </mat-drawer-container>
     </main>

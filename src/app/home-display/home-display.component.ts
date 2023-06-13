@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProblemsService, Problem } from '../problems.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-home-display',
@@ -11,11 +12,18 @@ export class HomeDisplayComponent implements OnInit {
   problems: Problem[] = [];
   problemForm!: FormGroup;
   showForm: boolean = false;
+  userData: any;
 
-  constructor(private formBuilder: FormBuilder, private problemsService: ProblemsService) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private problemsService: ProblemsService,
+    private userService: UserService
+    ) { }
 
   ngOnInit() {
     this.problems = this.problemsService.problems;
+    this.userData = this.userService.userData;
+    console.log(this.userData)
     this.initializeForm();
   }
 

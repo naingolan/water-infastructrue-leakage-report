@@ -2,9 +2,12 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
+
+
 // import { LanguageService } from './language-service.service';
 // import { UserService } from './user.service';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-home',
@@ -30,8 +33,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     // private languageService: LanguageService,
-    // private userService: UserService,
-    // private router: Router
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngAfterViewInit(): void {}
@@ -59,6 +62,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   openUserOptions(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('uuid');
+    this.router.navigate(['/registration']);
   }
 
   toggleSidebar() {
