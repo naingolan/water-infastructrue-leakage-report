@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Problem } from '../problems.service';
+import { Problem } from '../problem.service';
 
 @Component({
   selector: 'app-problem-dialog',

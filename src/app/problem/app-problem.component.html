@@ -5,7 +5,10 @@
         <mat-icon>add</mat-icon>
       </button>      
     </div>
-    <div class="problem-form" *ngIf="showForm">
+    <div *ngIf="showForm">
+      <app-problem-form (formSubmitted)="onFormSubmitted()"></app-problem-form>
+    </div>
+    <!-- <div class="problem-form" *ngIf="showForm">
       <h2>Enter Problem Details</h2>
       <form [formGroup]="problemForm" (ngSubmit)="addProblem()">
         <mat-form-field>
@@ -30,8 +33,11 @@
         </div>
         <button mat-raised-button color="primary" type="submit">Submit</button>
       </form>
-    </div>
-    <div class="problem-list">
+    </div> -->
+
+
+
+    <!-- <div class="problem-list">
       <h2>Problems List</h2>
       <table>
         <thead>
@@ -55,6 +61,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
+    <app-problem-location></app-problem-location>
   </main>
   

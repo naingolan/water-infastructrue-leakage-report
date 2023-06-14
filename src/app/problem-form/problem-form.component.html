@@ -1,0 +1,38 @@
+<form [formGroup]="problemForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+        <mat-select formControlName="kind" required (selectionChange)="onSelectionChange()">
+          <mat-option *ngFor="let kind of problemKinds" [value]="kind.name">{{ kind.name }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="problemForm.get('kind')?.hasError('required')">Kind is required</mat-error>
+        <mat-error *ngIf="problemForm.get('kind')?.invalid && !problemForm.get('kind')?.hasError('required')">Invalid kind</mat-error>
+      </mat-form-field>
+      
+
+      
+    <div class="downer">
+        <mat-label for="image-input" class="image-upload">
+          <mat-icon class="iconer">image</mat-icon>
+          <input type="file" id="image-input" (change)="onImageChange($event)" accept="image/*" required>
+        </mat-label>
+        <div *ngIf="selectedImage" class="image-preview">
+          <img [src]="selectedImage" alt="Image Preview">
+        </div>
+      </div>   
+       
+    <div>
+      <mat-label for="description">Description:</mat-label>
+      <mat-form-field>
+        <textarea id="description" formControlName="description" required></textarea>
+        <mat-error *ngIf="problemForm.get('description')?.hasError('required')">Description is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-label for="location">Location:</mat-label>
+      <button class="location" (click)="addProblemLocation()">Capture Location</button>
+    </div>
+    <div>
+      <button type="submit" [disabled]="problemForm.invalid">Submit</button>
+    </div>
+  </form>
+  

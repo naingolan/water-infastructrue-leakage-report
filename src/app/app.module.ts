@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 
 import { MatSliderModule } from '@angular/material/slider';
@@ -13,6 +13,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatOptionModule } from '@angular/material/core';
+
 
 
 
@@ -20,11 +22,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
-import { HomeDisplayComponent } from './home-display/home-display.component';
+import { HomeDisplayComponent } from './problem/app-problem.component';
 import { ProblemDialogComponent } from './problem-dialog/problem-dialog.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './user.service';
+import { ProblemLocationComponent } from './problem-location/problem-location.component';
+import { ProblemFormComponent } from './problem-form/problem-form.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { TokenInterceptor } from './token.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +40,9 @@ import { UserService } from './user.service';
     HomeDisplayComponent,
     ProblemDialogComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    ProblemLocationComponent,
+    ProblemFormComponent
   ],
   imports: [
     HttpClientModule,
@@ -49,9 +58,13 @@ import { UserService } from './user.service';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatOptionModule,
+    MatRadioModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
