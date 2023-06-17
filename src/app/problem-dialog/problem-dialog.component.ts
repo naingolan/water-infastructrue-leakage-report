@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Problem } from '../problem.service';
@@ -12,7 +12,6 @@ export class ProblemDialogComponent implements OnInit {
   problemForm!: FormGroup;
   imagePreview!: string;
   defaultStatus = 'Pending';
-  
 
   constructor(
     private dialogRef: MatDialogRef<ProblemDialogComponent>,

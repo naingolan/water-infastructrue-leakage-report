@@ -14,7 +14,7 @@ throw new Error('Method not implemented.');
 }
   @Output() formSubmitted: EventEmitter<void> = new EventEmitter<void>();
   problemForm!: FormGroup ;
-  problemKinds: ProblemKind[] = this.problemService.problemKinds;
+ // problemKinds: ProblemKind[] = this.problemService.problemKinds;
   latitudeObtained!: number;
   longitudeObtained!: number;
   imageSrc!: string;
@@ -29,16 +29,16 @@ throw new Error('Method not implemented.');
 
   ngOnInit(): void {
     this.initForm();
-    this.problDisplay();
-    this.problemKinds = this.problemService.problemKinds,
+   // this.problDisplay();
+   // this.problemKinds = this.problemService.problemKinds,
     this.problemService.fetchProblemKinds();
     //this.fetchProblemKinds();
   }
-  problDisplay():void{
-    for(let kind of this.problemKinds){
-      console.log(kind)
-    }
-  }
+  // problDisplay():void{
+  //   for(let kind of this.problemKinds){
+  //     console.log(kind)
+  //   }
+  // }
   initForm(): void {
     this.problemForm = this.formBuilder.group({
       kind: ['', Validators.required],

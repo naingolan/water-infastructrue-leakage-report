@@ -12,8 +12,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -36,6 +38,8 @@ import { ProblemDisplayComponent } from './problem-display/problem-display.compo
 
 import { ChangeDetectorRef } from '@angular/core';
 import { ProblemService } from './problem.service';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { SingleProblemComponent } from './single-problem/single-problem.component';
 
 
 @NgModule({
@@ -48,9 +52,11 @@ import { ProblemService } from './problem.service';
     LoginComponent,
     ProblemLocationComponent,
     ProblemFormComponent,
-    ProblemDisplayComponent
+    ProblemDisplayComponent,
+    SingleProblemComponent
   ],
   imports: [
+    FormsModule,
     MatSelectModule,
     HttpClientModule,
     MatListModule,
@@ -67,7 +73,10 @@ import { ProblemService } from './problem.service';
     MatInputModule,
     ReactiveFormsModule,
     MatOptionModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [
     //{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }

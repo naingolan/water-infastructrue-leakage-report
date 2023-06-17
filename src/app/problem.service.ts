@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError , Subject} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { EventService } from './event.service';
-import { ChangeDetectorRef } from '@angular/core';
 
-
+export interface reportedBy{
+    username?: string;
+    _id?: string;
+}
 export interface Problem {
+  _id?: any;
   id?: number;
   kind: ProblemKind;
   description: string;
   imageSrc: string;
+  location?: string;
   latitude: number;
   longitude: number;
   reporter: string;
@@ -18,7 +21,7 @@ export interface Problem {
   reportedAt?: Date;
   assignedTo?: string;
   assignedAt?: Date;
-  // Other optional properties
+  reportedBy?: reportedBy;
 }
 
 export interface ProblemKind {
@@ -30,30 +33,24 @@ export interface ProblemKind {
   providedIn: 'root'
 })
 export class ProblemService {
-  apiUrl = 'http://localhost:3000/api/problems';
-  problemKinds: ProblemKind[] = [];
-  problems: Problem[] = [];
+  private apiUrl = 'http://localhost:3000/api/problems';
+  private problemKinds: ProblemKind[] = [];
+  private problems: Problem[] = [];
 
-  constructor(
-    private http: HttpClient,
-    private changeDetector  : ChangeDetectorRef,
-    ) {}
+  constructor(private http: HttpClient) {}
 
-  fetchProblemKinds(): void {
+  fetchProblemKinds(): Observable<ProblemKind[]> {
     const url = `${this.apiUrl}/kinds`;
-    this.http
-      .get<ProblemKind[]>(url)
-      .pipe(
-        tap((kinds: ProblemKind[]) => {
-          this.problemKinds = kinds;
-          console.log(this.problemKinds);
-        }),
-        catchError((error: any) => {
-          console.log('Error fetching problem kinds:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe();
+    return this.http.get<ProblemKind[]>(url).pipe(
+      tap((kinds: ProblemKind[]) => {
+        this.problemKinds = kinds;
+        console.log(this.problemKinds);
+      }),
+      catchError((error: any) => {
+        console.log('Error fetching problem kinds:', error);
+        return throwError(error);
+      })
+    );
   }
 
   reportProblem(problem: Problem): Observable<Problem> {
@@ -62,14 +59,7 @@ export class ProblemService {
       'Authorization': `Bearer ${authToken}`
     });
     const url = `${this.apiUrl}/report`;
-
-    return this.http.post<Problem>(url, problem, { headers }).pipe(
-      tap((newProblem: Problem) => {
-        // Update the list of problems by fetching the updated list
-        this.fetchProblems().subscribe();
-        this.changeDetector.detectChanges();
-      })
-    );
+    return this.http.post<Problem>(url, problem, { headers });
   }
 
   fetchProblems(): Observable<Problem[]> {
@@ -78,12 +68,7 @@ export class ProblemService {
       'Authorization': `Bearer ${authToken}`
     });
     const url = `${this.apiUrl}/problems`;
-
-    return this.http.get<Problem[]>(url, { headers }).pipe(
-      tap((problems: Problem[]) => {
-        this.problems = problems;
-      })
-    );
+    return this.http.get<Problem[]>(url, { headers });
   }
 
   deleteProblem(problemId: number): Observable<any> {
