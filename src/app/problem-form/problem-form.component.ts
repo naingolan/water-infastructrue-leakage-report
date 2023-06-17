@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ProblemService, Problem, ProblemKind } from '../problem.service';
 import { UserService } from '../user.service';
 
@@ -9,14 +9,17 @@ import { UserService } from '../user.service';
   styleUrls: ['./problem-form.component.css']
 })
 export class ProblemFormComponent implements OnInit {
+onOptionSelected(arg0: any) {
+throw new Error('Method not implemented.');
+}
   @Output() formSubmitted: EventEmitter<void> = new EventEmitter<void>();
   problemForm!: FormGroup ;
-  problemKinds!: ProblemKind[];
+  problemKinds: ProblemKind[] = this.problemService.problemKinds;
   latitudeObtained!: number;
   longitudeObtained!: number;
   imageSrc!: string;
   selectedImage!: string;
-required: any;
+  required: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,9 +29,16 @@ required: any;
 
   ngOnInit(): void {
     this.initForm();
-    this.fetchProblemKinds();
+    this.problDisplay();
+    this.problemKinds = this.problemService.problemKinds,
+    this.problemService.fetchProblemKinds();
+    //this.fetchProblemKinds();
   }
-
+  problDisplay():void{
+    for(let kind of this.problemKinds){
+      console.log(kind)
+    }
+  }
   initForm(): void {
     this.problemForm = this.formBuilder.group({
       kind: ['', Validators.required],
@@ -37,17 +47,17 @@ required: any;
     });
   }
 
-  fetchProblemKinds(): void {
-    this.problemService.getProblemKinds().subscribe(
-      (kinds: ProblemKind[]) => {
-        this.problemKinds = kinds;
-        console.log(kinds);
-      },
-      (error: any) => {
-        console.log('Error fetching problem kinds:', error);
-      }
-    );
-  }
+  // fetchProblemKinds(): void {
+  //   this.problemService.getProblemKinds().subscribe(
+  //     (kinds: ProblemKind[]) => {
+  //       this.problemKinds = kinds;
+  //       console.log(kinds);
+  //     },
+  //     (error: any) => {
+  //       console.log('Error fetching problem kinds:', error);
+  //     }
+  //   );
+  // }
   
   onSelectionChange(): void {
     const select = document.querySelector('mat-select');
@@ -92,24 +102,27 @@ required: any;
       return;
     }
   
-    const reporterId = this.userService.userData.id;
+    const reporterId = localStorage.getItem('uuid')??"";
     const latitude = this.latitudeObtained; 
     const longitude = this.longitudeObtained; 
     const imageSrc = this.imageSrc
   
     const problem: Problem = {
-      kind: this.problemForm.value.name,
+      kind : this.problemForm.value.kind,
       imageSrc: imageSrc ,
       description: this.problemForm.value.description,
       reporter: reporterId,
       latitude: latitude, // Assign latitude value to the problem object
       longitude: longitude, // Assign longitude value to the problem object
     };
-  
+    console.log(problem);
     this.problemService.reportProblem(problem).subscribe(
       (createdProblem: Problem) => {
         console.log('Problem created:', createdProblem);
-        // Handle success, redirect, or perform other actions
+        this.problemService.fetchProblems().subscribe(() => {
+          
+        });
+        
       },
       (error: any) => {
         console.log('Error creating problem:', error);

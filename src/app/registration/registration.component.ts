@@ -30,7 +30,6 @@ export class RegistrationComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    this.problemService.getProblemKinds()
     this.registrationForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -61,8 +60,9 @@ export class RegistrationComponent implements OnInit {
           (userData) => {
             console.log('User data fetched successfully:', userData);
             this.userService.userData = userData; // Assign the userData to the userData property of the userService
-            })
-        this.router.navigate(['/home'], { queryParams: { userId } }); // Pass the userId as a query parameter to the home route
+            });
+        this.problemService.fetchProblemKinds();
+        this.router.navigate(['/home'], { queryParams: { userId, token } }); // Pass the userId as a query parameter to the home route
         console.log("I am now moving");
       },
       (error) => {

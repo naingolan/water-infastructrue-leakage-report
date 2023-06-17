@@ -31,6 +31,11 @@ import { ProblemLocationComponent } from './problem-location/problem-location.co
 import { ProblemFormComponent } from './problem-form/problem-form.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { TokenInterceptor } from './token.interceptor';
+import { MatSelectModule } from '@angular/material/select';
+import { ProblemDisplayComponent } from './problem-display/problem-display.component';
+
+import { ChangeDetectorRef } from '@angular/core';
+import { ProblemService } from './problem.service';
 
 
 @NgModule({
@@ -42,9 +47,11 @@ import { TokenInterceptor } from './token.interceptor';
     RegistrationComponent,
     LoginComponent,
     ProblemLocationComponent,
-    ProblemFormComponent
+    ProblemFormComponent,
+    ProblemDisplayComponent
   ],
   imports: [
+    MatSelectModule,
     HttpClientModule,
     MatListModule,
     MatMenuModule,
@@ -63,7 +70,8 @@ import { TokenInterceptor } from './token.interceptor';
     MatRadioModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    //{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    ProblemService
   ],
   bootstrap: [AppComponent]
 })

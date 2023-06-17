@@ -30,9 +30,11 @@ export class HomeDisplayComponent implements OnInit {
     console.log(this.userData)
     this.initializeForm();
 
-    this.reverseGeocode(-6.8059136, 39.2462336).subscribe((result: any) => {
-      console.log(result)
-    });
+    // this.reverseGeocode(-6.8059136, 39.2462336).subscribe((result: any) => {
+    //   console.log(result)
+    // });
+  
+  
   }
 
   reverseGeocode(latitude: number, longitude: number) {

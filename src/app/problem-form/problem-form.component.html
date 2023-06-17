@@ -1,14 +1,17 @@
-<form [formGroup]="problemForm" (ngSubmit)="onSubmit()">
+<!-- <form [formGroup]="problemForm" (ngSubmit)="onSubmit()">
 
-    <mat-form-field>
-        <mat-select formControlName="kind" required (selectionChange)="onSelectionChange()">
-          <mat-option *ngFor="let kind of problemKinds" [value]="kind.name">{{ kind.name }}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="problemForm.get('kind')?.hasError('required')">Kind is required</mat-error>
-        <mat-error *ngIf="problemForm.get('kind')?.invalid && !problemForm.get('kind')?.hasError('required')">Invalid kind</mat-error>
-      </mat-form-field>
+<mat-form-field>
+  <mat-select  required>
+    <mat-option *ngFor="let kind of problemKinds" [value]="kind.name">{{ kind.name }}</mat-option>
+  </mat-select>
+  <mat-error *ngIf="problemForm.get('kind')?.hasError('required')">Kind is required</mat-error>
+</mat-form-field>
+
       
-
+   <select class="demoiser">
+    <option *ngFor="let kind of problemKinds">{{ kind.name }}</option>
+    <option value="saab">Saab</option>
+    </select>
       
     <div class="downer">
         <mat-label for="image-input" class="image-upload">
@@ -31,6 +34,48 @@
       <mat-label for="location">Location:</mat-label>
       <button class="location" (click)="addProblemLocation()">Capture Location</button>
     </div>
+    <div>
+      <button type="submit" [disabled]="problemForm.invalid">Submit</button>
+    </div>
+  </form>
+  
+
+
+   -->
+
+
+   <form [formGroup]="problemForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="kind">Kind:</label>
+        <select id="kind" formControlName="kind" required>
+          <option *ngFor="let kind of problemKinds" [value]="kind">{{ kind }}</option>
+        </select>
+        <div *ngIf="problemForm.get('kind')?.hasError('required')">Kind is required</div>
+      </div>
+      
+    
+
+    <div class="downer">
+      <label for="image-input" class="image-upload">
+        <span class="iconer">image</span>
+        <input type="file" id="image-input" (change)="onImageChange($event)" accept="image/*" required>
+      </label>
+      <div *ngIf="selectedImage" class="image-preview">
+        <img [src]="selectedImage" alt="Image Preview">
+      </div>
+    </div>
+    
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description" required></textarea>
+      <div *ngIf="problemForm.get('description')?.hasError('required')">Description is required</div>
+    </div>
+    
+    <div>
+      <label for="location">Location:</label>
+      <button class="location" (click)="addProblemLocation()">Capture Location</button>
+    </div>
+    
     <div>
       <button type="submit" [disabled]="problemForm.invalid">Submit</button>
     </div>

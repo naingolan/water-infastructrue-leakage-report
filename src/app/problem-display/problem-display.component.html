@@ -1,0 +1,13 @@
+
+
+<h2>Here I display problem</h2>
+<div *ngFor="let problem of problems">
+    <!-- Display problem kind details here -->
+    <p>{{ problem.kind }}</p>
+    <p>{{ problem.description }}</p>
+    <img src="{{ problem.imageSrc }}" alt="Problem Image">
+    <p>{{problem.status}}</p>
+    <p>{{problem.latitude}}</p>
+    <p>{{problem.reportedAt}}</p>
+</div>
+  

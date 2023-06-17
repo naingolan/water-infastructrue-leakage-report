@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { EventService } from './event.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 export interface Problem {
   id?: number;
@@ -28,28 +31,59 @@ export interface ProblemKind {
 })
 export class ProblemService {
   apiUrl = 'http://localhost:3000/api/problems';
+  problemKinds: ProblemKind[] = [];
+  problems: Problem[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private changeDetector  : ChangeDetectorRef,
+    ) {}
 
-  getProblemKinds(): Observable<ProblemKind[]> {
+  fetchProblemKinds(): void {
     const url = `${this.apiUrl}/kinds`;
-    return this.http.get<string[]>(url).pipe(
-      map((kinds: string[]) => {
-        return kinds.map((kind: string, index: number) => {
-          return { id: index, name: kind };
-        });
+    this.http
+      .get<ProblemKind[]>(url)
+      .pipe(
+        tap((kinds: ProblemKind[]) => {
+          this.problemKinds = kinds;
+          console.log(this.problemKinds);
+        }),
+        catchError((error: any) => {
+          console.log('Error fetching problem kinds:', error);
+          return throwError(error);
+        })
+      )
+      .subscribe();
+  }
+
+  reportProblem(problem: Problem): Observable<Problem> {
+    const authToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${authToken}`
+    });
+    const url = `${this.apiUrl}/report`;
+
+    return this.http.post<Problem>(url, problem, { headers }).pipe(
+      tap((newProblem: Problem) => {
+        // Update the list of problems by fetching the updated list
+        this.fetchProblems().subscribe();
+        this.changeDetector.detectChanges();
       })
     );
   }
 
-  reportProblem(problem: Problem): Observable<Problem> {
-    const url = `${this.apiUrl}/report`;
-    return this.http.post<Problem>(url, problem);
-  }
-
-  getAllProblems(): Observable<Problem[]> {
+  fetchProblems(): Observable<Problem[]> {
+    const authToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${authToken}`
+    });
     const url = `${this.apiUrl}/problems`;
-    return this.http.get<Problem[]>(url);
+
+    return this.http.get<Problem[]>(url, { headers }).pipe(
+      tap((problems: Problem[]) => {
+        this.problems = problems;
+      })
+    );
   }
 
   deleteProblem(problemId: number): Observable<any> {
@@ -63,14 +97,17 @@ export class ProblemService {
     return this.http.put<Problem>(url, body);
   }
 
-  //additional for forms   
-  getLocationService():Promise<any>{
-    return new Promise((resolve, reject)=>{
-      navigator.geolocation.getCurrentPosition((position)=>{
-        resolve(position);
-      },(err)=>{
-        reject(err);
-      })
-    })
+  // Additional method for getting user location
+  getLocationService(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve(position);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
   }
 }
