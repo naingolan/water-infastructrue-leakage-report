@@ -22,7 +22,7 @@ export class RegistrationComponent implements OnInit {
   registrationForm!: FormGroup;
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private formBuilder: FormBuilder,
     private router: Router,
     private userService: UserService,
@@ -31,12 +31,10 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      name: ['', Validators.required],
       password: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required],
-      street: ['', Validators.required],
-      district: ['', Validators.required],
     });
   }
 
@@ -62,8 +60,15 @@ export class RegistrationComponent implements OnInit {
             this.userService.userData = userData; // Assign the userData to the userData property of the userService
             });
         this.problemService.fetchProblemKinds();
-        this.router.navigate(['/home'], { queryParams: { userId, token } }); // Pass the userId as a query parameter to the home route
-        console.log("I am now moving");
+        const role = this.userService.getUserRole();
+        console.log(role);
+        if (role === 'user') {
+          this.router.navigate(['/user'], { queryParams: { userId } });
+        }else if(role === 'staff'){
+          this.router.navigate(['/staff'], { queryParams: { userId } });
+        }else{
+          this.router.navigate(['/admin'], { queryParams: { userId } });
+        }
       },
       (error) => {
         console.error('Failed to register user:', error);

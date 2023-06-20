@@ -4,8 +4,9 @@ import { Observable, throwError , Subject} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 export interface reportedBy{
-    username?: string;
+    name?: string;
     _id?: string;
+    phoneNumber?:string;
 }
 export interface Problem {
   _id?: any;
@@ -69,6 +70,15 @@ export class ProblemService {
     });
     const url = `${this.apiUrl}/problems`;
     return this.http.get<Problem[]>(url, { headers });
+  }
+
+  fetchProblemById(problemId: number): Observable<Problem> {
+    const authToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${authToken}`
+    });
+    const url = `${this.apiUrl}/problems/${problemId}`;
+    return this.http.get<Problem>(url, { headers });
   }
 
   deleteProblem(problemId: number): Observable<any> {

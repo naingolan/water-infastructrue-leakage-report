@@ -7,15 +7,15 @@ import { MatSidenav } from '@angular/material/sidenav';
 // import { LanguageService } from './language-service.service';
 // import { UserService } from './user.service';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
-  title = 'smart-efd-clone2';
+export class UserComponent implements OnInit, AfterViewInit {
+  title = 'water-infastructure managemenent system';
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isSmallScreen: boolean | undefined;
   isScreenSmall: boolean | undefined;
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {}
 
   ngOnInit() {
-    
+
 
     this.breakpointObserver
       .observe([Breakpoints.Small])
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   openUserOptions(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('uuid');
-    this.router.navigate(['/registration']);
+    this.router.navigate(['/login']);
   }
 
   toggleSidebar() {

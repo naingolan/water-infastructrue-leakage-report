@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProblemService, Problem, ProblemKind } from '../problem.service';
-import { UserService } from '../user.service';
-import { Observable, map } from 'rxjs';
+import { ProblemService, Problem, ProblemKind } from '../../problem.service';
+import { UserService } from '../../user.service';
+import { Observable, catchError, map, of } from 'rxjs';
 import { DatePipe } from '@angular/common';
 
 
@@ -12,6 +12,7 @@ import { ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 declare var google: any;
 
 @Component({
@@ -22,9 +23,7 @@ declare var google: any;
 
 })
 export class HomeDisplayComponent implements OnInit {
-viewProblem(arg0: any) {
-throw new Error('Method not implemented.');
-}
+
   problemsDataSource: MatTableDataSource<Problem> = new MatTableDataSource<Problem>();
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -54,7 +53,8 @@ throw new Error('Method not implemented.');
     private problemService: ProblemService,
     private userService: UserService,
     private datePipe: DatePipe,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -97,7 +97,7 @@ throw new Error('Method not implemented.');
       this.problemsDataSource.paginator = this.paginator;
     });
   }
-  
+
   fetchProblemKinds(): void {
     this.problemService.fetchProblemKinds().subscribe(
       (kinds: ProblemKind[]) => {
@@ -165,9 +165,9 @@ throw new Error('Method not implemented.');
       }
     );
   }
-  
 
-  
+
+
   deleteProblem(problemId: string): void {
     // Perform the deletion logic here
     // You can call the appropriate service method to delete the problem
@@ -175,12 +175,11 @@ throw new Error('Method not implemented.');
 
 
   //for location
-  getLocation(latitude: number, longitude: number): Promise<string> {
+  getLocation(latitude: number, longitude: number): Observable<string> {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyAuC-zLWbKCbkgZ1UUBlva6iARfqaipGfU`;
-    
-    return this.http.get(url)
-      .toPromise()
-      .then((response: any) => {
+
+    return this.http.get(url).pipe(
+      map((response: any) => {
         const addressComponents = response.results[0].address_components;
         const street = this.getAddressComponent(addressComponents, 'route');
         const ward = this.getAddressComponent(addressComponents, 'sublocality');
@@ -188,19 +187,25 @@ throw new Error('Method not implemented.');
         const country = this.getAddressComponent(addressComponents, 'country');
 
         return `${street}, ${ward}, ${district}, ${country}`;
-      })
-      .catch((error: any) => {
+      }),
+      catchError((error: any) => {
         console.error('Error getting location:', error);
-        return '';
-      });
+        return of('');
+      })
+    );
   }
-
   private getAddressComponent(addressComponents: any[], type: string): string {
     const component = addressComponents.find((component: any) =>
       component.types.includes(type)
     );
 
     return component ? component.long_name : '';
+  }
+
+
+  viewProblem(problemId: string): void {
+    console.log("I've been clicked");
+    this.router.navigate(['user/problem', problemId]);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Staff } from '../staff.service';
-import { StaffService } from '../staff.service';
+import { Staff } from '../../staff.service';
+import { StaffService } from '../../staff.service';
 import { Observable } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 

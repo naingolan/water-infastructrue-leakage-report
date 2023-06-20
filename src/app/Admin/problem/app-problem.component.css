@@ -1,6 +1,8 @@
+
 .add-button{
     width: 100%;
-    margin:4vh auto;
+    margin:1vh auto;
+    margin-top:0;
     background-color: white;
     height:50px;
     color:var(--color);
@@ -8,14 +10,18 @@
     border-radius:10px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
+.add-button>mat-icon{
+  color:var(--color)
+}
 .add-button:hover{
     background-color: purple;
 }
 h2{
-    color:var(--color)
+    color:var(--color);
+    font-size: medium;
 }
 main{
-    background-color:none;
+    background-color:var(--background-color);
     padding:0 5vw;
     height: 100%;;
 }
@@ -25,16 +31,18 @@ table {
     box-shadow: var(--box-shadow);
     border-radius: 20px;
     padding:20px;
+    background-color: white
   }
 tbody{
     border-radius: 20px;
 }
-  
+
   th, td {
-    border: 1px solid #ccc;
+    border: 2px solid none;
     padding: 8px;
+    color:var(--color)
   }
-  
+
   th {
     background-color: var(--color);
     text-align: center;
@@ -42,27 +50,28 @@ tbody{
   }
   td{
     background-color: white;
-    color:var(--color);
+    color:black;
     text-align: center;
     padding:0;
     margin:0;
+    font-size:small
   }
-  
+
   td img {
     width: 75px;
     height: 75px;
     border-radius: 10px;
     margin:5px 0;
   }
-  
+
   td.status-pending {
     color: red;
   }
-  
+
   td.status-complete {
     color: green;
   }
-  
+
   .problem-form{
     background-color: white;
     border-radius: 20px;
@@ -84,6 +93,10 @@ tbody{
 mat-form-field{
     margin:20px;
 
+}
+mat-icon{
+  background-color: none;
+  color:white;
 }
 mat-form-field>input{
     background-color:var(--color)!important;
@@ -159,11 +172,37 @@ button:disabled {
 .image-upload input[type="file"] {
   display: none;
 }
-
+.location{
+  display:flex;
+  flex-direction:column;
+  border-radius:10px;
+}
 .iconer{
-  background-color: white;
+  background-color:white;
   font-size: 26px;
   color: var(--color)
+}
+.submit{
+  display:flex;
+  flex-direction: row-reverse;
+}
+.buttoner, .buttoner2{
+  color:var(--color);
+  background-color:white;
+}
+.buttoner>mat-icon{
+  color:var(--color);
+}
+.buttoner2>mat-icon{
+  color:red;
+}
+.submit>button{
+  border-radius:20px;
+  width:40%;
+}
+
+.iconer>mat-icon{
+  color:var(--color)
 }
 .image-upload{
   background-color: white;
@@ -178,7 +217,7 @@ button:disabled {
 }
 .demoiser{
   color:black;
-  
+
 }
 
 

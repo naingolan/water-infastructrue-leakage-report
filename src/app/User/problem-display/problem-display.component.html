@@ -1,0 +1,16 @@
+<div *ngFor="let staff of staffList$ | async">
+    <p>{{ staff.name }}</p>
+    <p>{{ staff.position }}</p>
+    <p>{{ staff.department }}</p>
+    <p>{{ staff.salary }}</p>
+  </div>
+  
+  <h2>Add New Staff</h2>
+<form [formGroup]="staffForm" (ngSubmit)="addStaff()">
+  <input type="text" formControlName="name" placeholder="Staff Name" required>
+  <input type="text" formControlName="position" placeholder="Position" required>
+  <input type="text" formControlName="department" placeholder="Department" required>
+  <input type="number" formControlName="salary" placeholder="Salary" required>
+  <!-- Add additional form fields for any other attributes you added to the Staff interface -->
+  <button type="submit" [disabled]="staffForm.invalid">Add Staff</button>
+</form>

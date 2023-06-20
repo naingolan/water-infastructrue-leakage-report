@@ -1,0 +1,175 @@
+<main>
+    <div class="add-problem">
+      <h2>Report a problem</h2>
+      <button mat-icon-button class="add-button" (click)="toggleForm()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="!showForm">
+      <form class="report-form" [formGroup]="problemForm" (ngSubmit)="onSubmit()">
+        <div class="report">
+            <label for="kind">Kind:</label>
+            <select id="kind" formControlName="kind" required>
+              <option *ngFor="let kind of problemKinds" [value]="kind">{{ kind }}</option>
+            </select>
+          </div>
+
+
+          <label>Upload Image</label>
+        <div class="downer">
+          <label for="image-input" class="image-upload">
+            <span class="iconer"><mat-icon color="blue">photo_camera</mat-icon></span>
+            <input type="file" id="image-input" (change)="onImageChange($event)" accept="image/*" required>
+          </label>
+          <div *ngIf="selectedImage" class="image-preview">
+            <img [src]="selectedImage" alt="Image Preview">
+          </div>
+        </div>
+
+        <div>
+          <label for="description">Description:</label>
+          <textarea id="description" formControlName="description" required></textarea>
+        </div>
+
+        <div class="location">
+          <label for="location">Location:</label>
+          <button class="location" (click)="addProblemLocation()">Capture Location</button>
+        </div>
+
+        <div class="submit">
+          <button type="submit" [disabled]="problemForm.invalid">Submit</button>
+        </div>
+      </form>
+
+    </div>
+    <!-- <div class="problem-form" *ngIf="showForm">
+      <h2>Enter Problem Details</h2>
+      <form [formGroup]="problemForm" (ngSubmit)="addProblem()">
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Location" formControlName="location">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Reporter" formControlName="reporter">
+        </mat-form-field>
+        <div class="file-input">
+            <div class="file-input-label">
+              <input type="file" (change)="handleImageInput($event)" accept="image/*">
+              <span>Select Image</span>
+            </div>
+            <mat-hint>Please select an image file.</mat-hint>
+          </div>
+
+        <div class="preview-image" *ngIf="problemForm.controls['imageSrc'].value">
+          <img [src]="problemForm.controls['imageSrc'].value" alt="Preview Image">
+        </div>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </form>
+    </div> -->
+
+
+
+    <!-- <div class="problem-list">
+      <h2>Problems List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Location</th>
+            <th>Reporter</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pothole of problems">
+            <td>{{ pothole.id }}</td>
+            <td><img [src]="pothole.imageSrc" alt=""></td>
+            <td>{{ pothole.name }}</td>
+            <td>{{ pothole.location }}</td>
+            <td>{{ pothole.reporter }}</td>
+            <td>{{ pothole.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+
+
+    <!--currently displaying the problem-->
+
+<h2>Problems reported</h2>
+<div *ngFor="let problem of problems$ | async">
+    <!-- Display problem kind details here -->
+    <p>{{ problem.kind }}</p>
+    <p>{{ problem.description }}</p>
+    <img src="{{ problem.imageSrc }}" alt="Problem Image">
+    <p>{{problem.status}}</p>
+    <p>{{problem.reportedBy?.name}}</p>
+    <p>{{problem.reportedAt}}</p>
+</div>
+
+<table mat-table [dataSource]="problemsDataSource" matSort>
+
+  <!-- No Column -->
+  <ng-container matColumnDef="no">
+    <th mat-header-cell *matHeaderCellDef>No</th>
+    <td mat-cell *matCellDef="let problem; let i = index">{{ i + 1 }}</td>
+  </ng-container>
+
+  <!-- Kind Column -->
+  <ng-container matColumnDef="kind">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>NAME</th>
+    <td mat-cell *matCellDef="let problem">{{ problem.kind }}</td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+    <td mat-cell *matCellDef="let problem">{{ problem.description }}</td>
+  </ng-container>
+
+  <!-- Reported By Column -->
+  <ng-container matColumnDef="reportedBy">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>REPORTER</th>
+    <td mat-cell *matCellDef="let problem">{{ problem.reportedBy?.name }}</td>
+  </ng-container>
+
+  <!-- Reported At Column -->
+  <ng-container matColumnDef="reportedAt">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>TIME</th>
+    <td mat-cell *matCellDef="let problem">{{ problem.reportedAt | date:'EEEE, MMMM d YYYY HH:mm' }}</td>
+  </ng-container>
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>STATUS</th>
+    <td mat-cell *matCellDef="let problem">{{ problem.status | uppercase }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>PREVIEW</th>
+    <td mat-cell *matCellDef="let problem">
+      <button mat-icon-button class="buttoner" (click)="viewProblem(problem._id)">
+        <mat-icon >visibility</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>DELETE</th>
+    <td mat-cell *matCellDef="let problem">
+      <button mat-icon-button class="buttoner2" *ngIf="problem.reportedBy._id==userId.toString()" (click)="deleteProblem(problem.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Table Rows -->
+  <tr mat-header-row *matHeaderRowDef="['no', 'kind', 'reportedBy', 'reportedAt', 'status', 'actions', 'delete']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['no', 'kind', 'reportedBy', 'reportedAt', 'status', 'actions', 'delete']"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</main>

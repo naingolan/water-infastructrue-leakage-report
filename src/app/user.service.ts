@@ -6,13 +6,12 @@ import { BehaviorSubject, Observable, of, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  
+
   userData: any;
   private userCreated = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { }
 
-  // Fetch user data based on userId and store it in the userData variable
   fetchUserData(userId: string): Observable<any> {
     const url = `http://localhost:3000/api/users/${userId}`;
     return this.http.get(url).pipe(
@@ -21,11 +20,18 @@ export class UserService {
       })
     );
   }
-  
+  getUserRole(): string {
+    if (this.userData && this.userData.role) {
+      console.log(this.userData.role);
+      return this.userData.role;
+    } else{
+      return "user"
+    }
+  }
 
-createdSignature(): Observable<boolean> {
-  const token = localStorage.getItem('authToken');
-  if (token) {
+  createdSignature(): Observable<boolean> {
+    const token = localStorage.getItem('authToken');
+    if (token) {
     return of(true);
   } else {
     return this.userCreated.asObservable();
@@ -42,5 +48,5 @@ createdSignature(): Observable<boolean> {
     return this.userData;
   }
 
-  
+
 }

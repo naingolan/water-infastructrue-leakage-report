@@ -23,35 +23,45 @@ import { MatSortModule } from '@angular/material/sort';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './home/home.component';
-import { HomeDisplayComponent } from './problem/app-problem.component';
-import { ProblemDialogComponent } from './problem-dialog/problem-dialog.component';
+import { HomeDisplayComponent } from './User/problem/app-problem.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './user.service';
-import { ProblemLocationComponent } from './problem-location/problem-location.component';
-import { ProblemFormComponent } from './problem-form/problem-form.component';
+import { ProblemLocationComponent } from './User/problem-location/problem-location.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { TokenInterceptor } from './token.interceptor';
 import { MatSelectModule } from '@angular/material/select';
-import { ProblemDisplayComponent } from './problem-display/problem-display.component';
+import { ProblemDisplayComponent } from './User/problem-display/problem-display.component';
 
 import { ChangeDetectorRef } from '@angular/core';
 import { ProblemService } from './problem.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { SingleProblemComponent } from './single-problem/single-problem.component';
-
+import { SingleProblemComponent } from './User/single-problem/single-problem.component';
+import { UserComponent } from './User/home/home.component';
+//Admin Imports
+import { AdminComponent } from './Admin/home/home.component';
+import { AdminSingleProblemComponent } from './Admin/single-problem/single-problem.component';
+import { AdminProblemDisplayComponent } from './Admin/problem-display/problem-display.component';
+import { AdminProblemLocationComponent } from './Admin/problem-location/problem-location.component';
+import { AdminHomeDisplayComponent } from './Admin/problem/app-problem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    //These are for the suer
+    UserComponent,
+    //These are for the admin
+    AdminComponent,
+    AdminHomeDisplayComponent,
+    AdminSingleProblemComponent,
+    AdminProblemDisplayComponent,
+    AdminProblemLocationComponent,
+    //These are for staff
+    //These are for the normal user
     HomeDisplayComponent,
-    ProblemDialogComponent,
     RegistrationComponent,
     LoginComponent,
     ProblemLocationComponent,
-    ProblemFormComponent,
     ProblemDisplayComponent,
     SingleProblemComponent
   ],

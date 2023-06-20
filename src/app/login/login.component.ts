@@ -7,6 +7,7 @@ import { UserService } from '../user.service';
 interface LoginResponse {
   message: string;
   userId: string;
+  token: string;
 }
 
 @Component({
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -40,22 +41,34 @@ export class LoginComponent implements OnInit {
     const loginData = this.loginForm.value;
     console.log(loginData);
     // Make the HTTP request to perform the login
-    // Replace the URL with your login endpoint
     this.http.post<LoginResponse>('http://localhost:3000/api/users/login', loginData).subscribe(
       (response) => {
         console.log('User logged in successfully:', response);
-        const userId = response.userId; // Access the userId from the response
+        const userId = response.userId;
+        const authToken = response.token;
+
         localStorage.setItem('uuid', userId);
+        localStorage.setItem('authToken', authToken);
+
         this.userService.fetchUserData(userId).subscribe(
           (userData) => {
             console.log('User data fetched successfully:', userData);
-            // Store user data in the service or local storage for access across components
+            // Store user data in the service
             this.userService.userData = userData; // Assign the userData to the userData property of the userService
           }
         );
-        this.router.navigate(['/home'], { queryParams: { userId } }); // Pass the userId as a query parameter to the home route
+        const role = this.userService.getUserRole();
+        console.log(role);
+        if (role === 'user') {
+          this.router.navigate(['/user'], { queryParams: { userId } });
+        }else if(role === 'staff'){
+          this.router.navigate(['/staff'], { queryParams: { userId } });
+        }else{
+          this.router.navigate(['/admin'], { queryParams: { userId } });
+        }
       },
       (error) => {
+        console.log(error);
         console.error('Failed to login:', error);
         // Add any error handling logic here
       }
