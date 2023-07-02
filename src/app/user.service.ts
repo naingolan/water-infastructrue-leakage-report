@@ -25,7 +25,7 @@ export class UserService {
       console.log(this.userData.role);
       return this.userData.role;
     } else{
-      return "user"
+      return "invalidated";
     }
   }
 

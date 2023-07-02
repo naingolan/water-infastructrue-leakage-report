@@ -98,6 +98,8 @@ export class HomeDisplayComponent implements OnInit {
     });
   }
 
+  
+
   fetchProblemKinds(): void {
     this.problemService.fetchProblemKinds().subscribe(
       (kinds: ProblemKind[]) => {

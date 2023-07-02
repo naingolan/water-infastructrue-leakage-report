@@ -45,6 +45,9 @@ import { AdminProblemDisplayComponent } from './Admin/problem-display/problem-di
 import { AdminProblemLocationComponent } from './Admin/problem-location/problem-location.component';
 import { AdminHomeDisplayComponent } from './Admin/problem/app-problem.component';
 
+//Staff Imports
+import { StaffComponent } from './Staff/staff/home.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +60,7 @@ import { AdminHomeDisplayComponent } from './Admin/problem/app-problem.component
     AdminProblemDisplayComponent,
     AdminProblemLocationComponent,
     //These are for staff
+    StaffComponent,
     //These are for the normal user
     HomeDisplayComponent,
     RegistrationComponent,

@@ -12,6 +12,7 @@ import { UserComponent } from './User/home/home.component';
 import { AdminComponent } from './Admin/home/home.component';
 import { AdminHomeDisplayComponent } from './Admin/problem/app-problem.component';
 import { AdminSingleProblemComponent } from './Admin/single-problem/single-problem.component';
+import { StaffComponent } from './Staff/staff/home.component';
 
 const routes: Routes = [
    { path: 'login', component: LoginComponent },
@@ -38,16 +39,19 @@ const routes: Routes = [
     //path for admin
     {  path: 'admin',
     component: AdminComponent,
-    canActivate: [UserAuthService],
+    //canActivate: [UserAuthService],
     children: [
       { path: 'problem', component: AdminHomeDisplayComponent},
       { path: 'problem/:id', component: AdminSingleProblemComponent},
       { path: '', redirectTo: 'problem', pathMatch: 'full'}
     ]
-  },
-   //{ path: 'staff', component: StaffComponent, canActivate: [StaffAuthService] },
-   //{ path: 'admin', component: AdminComponent, canActivate: [AdminAuthService] },
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    },
+    //path for staff
+   { path: 'staff',
+     component: StaffComponent,
+     //canActivate: [StaffAuthService]
+    },
+   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
 ];
 

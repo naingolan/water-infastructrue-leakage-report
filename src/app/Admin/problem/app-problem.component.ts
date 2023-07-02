@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ProblemService, Problem, ProblemKind } from '../../problem.service';
 import { UserService } from '../../user.service';
 import { Observable, catchError, map, of } from 'rxjs';
@@ -13,6 +13,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { StaffService, Staff} from 'src/app/staff.service';
 declare var google: any;
 
 @Component({
@@ -28,6 +29,7 @@ export class AdminHomeDisplayComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   problems$!: Observable<Problem[]>
+  staffList: Staff[] = [];
   showForm: boolean = false;
   userData: any;
   problemKinds: ProblemKind[] = [];
@@ -46,6 +48,8 @@ export class AdminHomeDisplayComponent implements OnInit {
   locationInfo: string = '';
   locationData: any;
 
+  //form
+  @ViewChild('formRef') formRef!: NgForm;
 
 
   constructor(
@@ -54,65 +58,95 @@ export class AdminHomeDisplayComponent implements OnInit {
     private userService: UserService,
     private datePipe: DatePipe,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private staffService: StaffService
   ) { }
 
   ngOnInit() {
     this.userData = this.userService.userData;
-    this.initForm();
-    this.fetchProblemKinds();
     this.fetchProblems();
+    this.fetchStaff();
+    this.getLocation(this.latitude, this.longitude);
+    this.initForm();
   }
 
-  initForm(): void {
-    this.problemForm = this.formBuilder.group({
-      kind: ['', Validators.required],
-      image: ['', Validators.required],
-      description: ['', Validators.required]
-    });
-  }
-
-  toggleForm(): void {
-    this.showForm = !this.showForm;
-  }
-
-  handleImageInput(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.problemForm.controls['image'].setValue(reader.result);
-      };
-    }
-  }
 
   fetchProblems(): void {
     this.problemService.fetchProblems().pipe(
       map((problems: Problem[]) => problems.reverse())
     ).subscribe((problems: Problem[]) => {
+      console.log(problems);
       //problems = this.locationInfo;
       this.problemsDataSource.data = problems;
       this.problemsDataSource.sort = this.sort;
       this.problemsDataSource.paginator = this.paginator;
     });
   }
+  getStatusCellStyle(status: string): { [key: string]: string } {
+    let backgroundColor = '';
 
-  fetchProblemKinds(): void {
-    this.problemService.fetchProblemKinds().subscribe(
-      (kinds: ProblemKind[]) => {
-        this.problemKinds = kinds;
+    switch (status) {
+      case 'pending':
+        backgroundColor = 'lightblue !important';
+        break;
+      case 'onprocess':
+        backgroundColor = 'yellow !important';
+        break;
+      case 'solved':
+        backgroundColor = 'lightgreen';
+        break;
+      default:
+        break;
+    }
+
+    return { 'background-color': backgroundColor };
+  }
+
+
+  fetchStaff(): void {
+    this.staffService.getStaffList().subscribe(
+      (staffList: Staff[]) => {
+        this.staffList = staffList;
+        console.log(staffList);
       },
       (error) => {
-        console.log('Error fetching problem kinds:', error);
+        console.log('Error fetching staff list:', error);
       }
     );
   }
 
-  onKindSelectionChange(selectedValue: string): void {
-    const kindControl = this.problemForm.get('kind');
-    kindControl!.setValue(selectedValue);
+  initForm(): void {
+    this.problemForm = new FormGroup({
+      assignedTo: new FormControl(null) // Initialize with null or any other default value
+    });
   }
+
+  onStaffSelectionChange(problemId: string): void {
+    if (this.problemForm.valid) {
+      const assignedTo = this.problemForm.get('assignedTo')?.value;
+      console.log("I have get undefined" + assignedTo);
+      //const staff = this.staffList.find(staff => staff.id === String(assignedTo));
+      const staff = this.staffList.find(staff => staff._id === assignedTo);
+      const staffId = staff?._id?.toString();
+      const staffName = staff?.name;
+      console.log(staffId, staffName);
+      if (problemId && staffId && staffName) {
+        this.staffService.assignStaff(problemId, staffId, staffName).subscribe(
+          (response) => {
+            console.log('Assigned staff successfully');
+          },
+          (error) => {
+            console.log('Error assigning staff:', error);
+          }
+        );
+      }
+    }
+    setTimeout(() => {
+      this.formRef.resetForm();
+      window.location.reload();
+    }, 500);
+  }
+
 
   addProblemLocation(): void {
     this.problemService.getLocationService().then((position) => {
@@ -121,19 +155,6 @@ export class AdminHomeDisplayComponent implements OnInit {
     }).catch((err) => {
       console.log(err);
     });
-  }
-
-  onImageChange(event: any): void {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.selectedImage = reader.result as string;
-      this.imageSrc = reader.result as string;
-      this.problemForm.patchValue({
-        image: reader.result
-      });
-    };
-    reader.readAsDataURL(file);
   }
 
   onSubmit(): void {
@@ -185,7 +206,7 @@ export class AdminHomeDisplayComponent implements OnInit {
         const ward = this.getAddressComponent(addressComponents, 'sublocality');
         const district = this.getAddressComponent(addressComponents, 'locality');
         const country = this.getAddressComponent(addressComponents, 'country');
-
+        console.log(`${street}, ${ward}, ${district}, ${country}`);
         return `${street}, ${ward}, ${district}, ${country}`;
       }),
       catchError((error: any) => {
@@ -202,10 +223,11 @@ export class AdminHomeDisplayComponent implements OnInit {
     return component ? component.long_name : '';
   }
 
-
   viewProblem(problemId: string): void {
     console.log("I've been clicked");
     this.router.navigate(['user/problem', problemId]);
   }
+
+
 
 }

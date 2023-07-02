@@ -1,10 +1,11 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 export interface Staff{
-  id?: number;
+  _id?: number;
   name: string;
   position: string;
   department: string;
@@ -15,15 +16,36 @@ export interface Staff{
   {providedIn: 'root'}
 )
 export class StaffService {
-  private apiUrl = 'http://localhost:3000/api/problems/staff';
+  private apiUrl = 'http://localhost:3000/api/problems';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+    ) {}
 
   getStaffList(): Observable<Staff[]> {
-    return this.http.get<Staff[]>(this.apiUrl);
+    console.log("I am not reached at all");
+    return this.http.get<Staff[]>( `${this.apiUrl}/staff`);
   }
 
   createStaff(newStaff: Staff): Observable<Staff> {
-    return this.http.post<Staff>(this.apiUrl, newStaff);
+    return this.http.post<Staff>(`${this.apiUrl}/staff`, newStaff);
   }
+
+  assignStaff(problemId: string, staffId: string, staffName: string): Observable<any> {
+    const payload = {
+      staffId: staffId,
+      staffName: staffName
+    };
+    return this.http.put<any>(`${this.apiUrl}/${problemId}/assign`, payload)
+    .pipe(
+      tap(() => {
+        // Reload the current page
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([this.router.url]);
+        });
+      }));
+    console.log("Staff sent request");
+  }
+
 }

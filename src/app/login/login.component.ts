@@ -17,6 +17,7 @@ interface LoginResponse {
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  role : string | undefined
 
   constructor(
     private http: HttpClient,
@@ -53,19 +54,21 @@ export class LoginComponent implements OnInit {
         this.userService.fetchUserData(userId).subscribe(
           (userData) => {
             console.log('User data fetched successfully:', userData);
+            this.role = userData.user.role;
+            console.log(userData);
+            if (this.role === 'user') {
+              this.router.navigate(['/user'], { queryParams: { userId } });
+            }else if(this.role === 'staff'){
+              this.router.navigate(['/staff'], { queryParams: { userId } });
+            }else{
+              console.log(" I am going this way");
+              this.router.navigate(['/login'], { queryParams: { userId } });
+            }
             // Store user data in the service
             this.userService.userData = userData; // Assign the userData to the userData property of the userService
           }
         );
-        const role = this.userService.getUserRole();
-        console.log(role);
-        if (role === 'user') {
-          this.router.navigate(['/user'], { queryParams: { userId } });
-        }else if(role === 'staff'){
-          this.router.navigate(['/staff'], { queryParams: { userId } });
-        }else{
-          this.router.navigate(['/admin'], { queryParams: { userId } });
-        }
+
       },
       (error) => {
         console.log(error);
