@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -47,6 +46,8 @@ import { AdminHomeDisplayComponent } from './Admin/problem/app-problem.component
 
 //Staff Imports
 import { StaffComponent } from './Staff/staff/home.component';
+import { StaffProblemsComponent } from './Staff/problem/app-problem.component';
+import { StaffSingleProblemComponent } from './Staff/single-problem/single-problem.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,8 @@ import { StaffComponent } from './Staff/staff/home.component';
     AdminProblemLocationComponent,
     //These are for staff
     StaffComponent,
+    StaffProblemsComponent,
+    StaffSingleProblemComponent,
     //These are for the normal user
     HomeDisplayComponent,
     RegistrationComponent,

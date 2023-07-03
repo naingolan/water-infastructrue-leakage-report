@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
+
 export interface Staff{
   _id?: number;
   name: string;
@@ -45,7 +46,20 @@ export class StaffService {
           this.router.navigate([this.router.url]);
         });
       }));
-    console.log("Staff sent request");
+  }
+
+  getAssignedProblems(staffId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/assigned/${staffId}`);
+  }
+
+  updateProblemStatus(id: string, status: string, staffFeedback?: string): Observable<any> {
+    const url = `${this.apiUrl}/problems/${id}/edit`;
+    const body = {
+      status,
+      staffFeedback
+    };
+
+    return this.http.put(url, body);
   }
 
 }

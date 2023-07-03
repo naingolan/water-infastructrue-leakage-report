@@ -1,0 +1,56 @@
+        <!-- staff dealing with problem-->
+        <h2 class="updation">Update Problem Status</h2>
+        <div class="problem-status">
+          <form [formGroup]="problemForm" (ngSubmit)="onSubmit()">
+            <div>
+              <label for="status">Problem Status:</label>
+              <select formControlName="status" id="status">
+                <option value="pending">Pending</option>
+                <option value="solved">Solved</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="staffFeedback">Staff Feedback:</label>
+              <textarea formControlName="staffFeedback" id="staffFeedback"></textarea>
+            </div>
+            <button type="submit">Update Problem</button>
+          </form>
+      </div>
+
+<main>
+    <div class="details">
+        <div class="details-header">
+            <h2>Problem Details</h2>
+        </div>
+        <div class="details-body">
+            <div class="details-body-left">
+                <div class="details-body-left-image">
+                    <img src="{{ problem.imageSrc }}" alt="Problem Image">
+                </div>
+                <div class="details-body-left-description">
+                    <p>{{ problem.description }}</p>
+                </div>
+            </div>
+            <div class="details-body-right">
+                <div class="details-body-right-status">
+                    <p>Status: {{ problem.status }}</p>
+                </div>
+                <div class="details-body-right-reported-by">
+                    <p>Reported By: {{ problem.reportedBy?.name }}</p>
+                </div>
+                <div class="details-body-right-reported-by">
+                  <p>Contacts: {{ problem.reportedBy?.phoneNumber }}</p>
+              </div>
+                <div class="details-body-right-reported-at">
+                    <p>Reported At: {{ problem.reportedAt }}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="location">
+    <app-problem-location></app-problem-location>
+    </div>
+
+</main>

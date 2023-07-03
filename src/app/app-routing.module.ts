@@ -13,6 +13,8 @@ import { AdminComponent } from './Admin/home/home.component';
 import { AdminHomeDisplayComponent } from './Admin/problem/app-problem.component';
 import { AdminSingleProblemComponent } from './Admin/single-problem/single-problem.component';
 import { StaffComponent } from './Staff/staff/home.component';
+import { StaffProblemsComponent } from './Staff/problem/app-problem.component';
+import { StaffSingleProblemComponent } from './Staff/single-problem/single-problem.component';
 
 const routes: Routes = [
    { path: 'login', component: LoginComponent },
@@ -29,7 +31,7 @@ const routes: Routes = [
     //Path for user
    {  path: 'user',
       component: UserComponent,
-      canActivate: [UserAuthService],
+      //canActivate: [UserAuthService],
       children: [
         { path: 'problem', component: HomeDisplayComponent},
         { path: 'problem/:id', component: SingleProblemComponent},
@@ -49,7 +51,12 @@ const routes: Routes = [
     //path for staff
    { path: 'staff',
      component: StaffComponent,
-     //canActivate: [StaffAuthService]
+     //canActivate: [StaffAuthService],
+     children: [
+      { path: 'problem', component: StaffProblemsComponent},
+      { path: 'problem/:id', component: StaffSingleProblemComponent},
+      { path: '', redirectTo: 'problem', pathMatch: 'full'}
+     ]
     },
    { path: '', redirectTo: 'login', pathMatch: 'full' },
 
