@@ -26,7 +26,9 @@
             ],
             "styles": [
               "src/custom-theme.scss",
+             "node_modules/canvasjs/css/canvasjs.min.css",
               "src/styles.css"
+
             ],
             "scripts": []
           },

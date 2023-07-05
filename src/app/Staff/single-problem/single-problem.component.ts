@@ -33,6 +33,7 @@ export class StaffSingleProblemComponent {
   fetchProblemById(problemId:number): void {
     this.problemService.fetchProblemById(problemId)
       .subscribe((problem: Problem) => {
+        console.log(problem);
         this.problem = problem;
       });
   }
@@ -44,14 +45,14 @@ export class StaffSingleProblemComponent {
     });
   }
 
-  onSubmit() {
+  onSubmit(problemId: string) {
     if (this.problemForm.invalid) {
       return;
     }
 
     const { status, staffFeedback } = this.problemForm.value;
 
-    this.staffService.updateProblemStatus('', status, staffFeedback)
+    this.staffService.updateProblemStatus(problemId , status, staffFeedback)
       .subscribe(
         response => {
           console.log('Problem status updated successfully');

@@ -49,6 +49,12 @@ import { StaffComponent } from './Staff/staff/home.component';
 import { StaffProblemsComponent } from './Staff/problem/app-problem.component';
 import { StaffSingleProblemComponent } from './Staff/single-problem/single-problem.component';
 
+import { DashboardComponent } from './User/dashboard/dashboard.component';
+import { AnouncementComponent } from './Admin/anouncement/anouncement.component';
+import { ChartComponent } from './Admin/charts/charts.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +76,10 @@ import { StaffSingleProblemComponent } from './Staff/single-problem/single-probl
     LoginComponent,
     ProblemLocationComponent,
     ProblemDisplayComponent,
-    SingleProblemComponent
+    SingleProblemComponent,
+    DashboardComponent,
+    AnouncementComponent,
+    ChartComponent
   ],
   imports: [
     FormsModule,

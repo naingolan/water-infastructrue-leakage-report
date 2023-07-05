@@ -1,7 +1,7 @@
         <!-- staff dealing with problem-->
         <h2 class="updation">Update Problem Status</h2>
         <div class="problem-status">
-          <form [formGroup]="problemForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="problemForm" (ngSubmit)="onSubmit(problem._id)">
             <div>
               <label for="status">Problem Status:</label>
               <select formControlName="status" id="status">

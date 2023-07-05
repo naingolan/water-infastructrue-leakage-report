@@ -15,6 +15,7 @@ import { AdminSingleProblemComponent } from './Admin/single-problem/single-probl
 import { StaffComponent } from './Staff/staff/home.component';
 import { StaffProblemsComponent } from './Staff/problem/app-problem.component';
 import { StaffSingleProblemComponent } from './Staff/single-problem/single-problem.component';
+import { DashboardComponent } from './User/dashboard/dashboard.component';
 
 const routes: Routes = [
    { path: 'login', component: LoginComponent },
@@ -35,7 +36,8 @@ const routes: Routes = [
       children: [
         { path: 'problem', component: HomeDisplayComponent},
         { path: 'problem/:id', component: SingleProblemComponent},
-        { path: '', redirectTo: 'problem', pathMatch: 'full'}
+        { path: 'dashboard', component: DashboardComponent},
+        { path: '', redirectTo: 'dashboard', pathMatch: 'full'}
       ]
     },
     //path for admin

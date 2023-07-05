@@ -53,7 +53,7 @@ export class StaffService {
   }
 
   updateProblemStatus(id: string, status: string, staffFeedback?: string): Observable<any> {
-    const url = `${this.apiUrl}/problems/${id}/edit`;
+    const url = `${this.apiUrl}/${id}/edit`;
     const body = {
       status,
       staffFeedback
