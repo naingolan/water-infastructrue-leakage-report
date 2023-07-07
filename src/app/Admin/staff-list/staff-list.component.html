@@ -1,0 +1,64 @@
+<div>
+  <h2>Staff List</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let staff of staffList">
+        <td>{{ staff.name}}</td>
+        <td>{{ staff.email }}</td>
+        <td>{{ staff.phoneNumber }}</td>
+        <td class="action">
+          <button (click)="deleteStaff(staff._id)"><mat-icon color="red">delete</mat-icon></button>
+          <button (click)="editStaff(staff._id)"><mat-icon>edit</mat-icon></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Create New Staff</h2>
+  <form (submit)="createStaff()">
+    <div>
+      <label>First Name:</label>
+      <input type="text" [(ngModel)]="newStaff.firstName" name="firstName" required>
+    </div>
+    <div>
+      <label>Last Name:</label>
+      <input type="text" [(ngModel)]="newStaff.lastName" name="lastName" required>
+    </div>
+    <div>
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="newStaff.email" name="email" required>
+    </div>
+    <div>
+      <label>Phone Number:</label>
+      <input type="tel" [(ngModel)]="newStaff.phoneNumber" name="phoneNumber" required>
+    </div>
+  <div>
+    <label>Department:</label>
+    <select [(ngModel)]="newStaff.department" name="department" required>
+      <option value="small disasters">Small Disasters</option>
+      <option value="large ones">Large Ones</option>
+    </select>
+  </div>
+  <div>
+    <label>Position:</label>
+    <select [(ngModel)]="newStaff.position" name="position" required>
+      <option value="assistant technician">Assistant Technician</option>
+      <option value="technician">Technician</option>
+    </select>
+  </div>
+
+
+    <button class="reg" type="submit">Create</button>
+  </form>
+
+
+</div>

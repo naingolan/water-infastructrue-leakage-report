@@ -1,14 +1,24 @@
 <main>
-  <div class="anoucements">
+  <div class="announcements">
+    <h2>New Announcement</h2>
     <div class="new">
-      <form>
-        <input type="text" name="title" placeholder="Title">
-        <textarea name="body" rows="8" cols="80" placeholder="Body"></textarea>
-        <input type="text" name="createdby" placeholder="Created By">
-        <input type="submit" name="submit" value="Submit">
+      <form [formGroup]="announcementForm" (ngSubmit)="createAnnouncement()">
+        <input type="text" formControlName="header" placeholder="Title">
+        <textarea formControlName="content" rows="8" cols="80" placeholder="Body"></textarea>
+        <input type="text" formControlName="createdBy" placeholder="Created By">
+        <button type="submit">Submit</button>
       </form>
     </div>
     <div class="previous">
+      <h2>Previous Announcements</h2>
+      <ul>
+        <li *ngFor="let announcement of announcements">
+          <h3>{{ announcement.header | uppercase }}</h3>
+          <p>{{ announcement.content }}</p>
+          <p>{{ announcement.createdBy }}</p>
+          <p>{{announcement.timestamp | date:'EEEE, MMMM d YYYY HH:mm'}}</p>
+        </li>
+      </ul>
     </div>
   </div>
 </main>

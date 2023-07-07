@@ -30,7 +30,15 @@ export class StaffService {
   }
 
   createStaff(newStaff: Staff): Observable<Staff> {
-    return this.http.post<Staff>(`${this.apiUrl}/staff`, newStaff);
+    return this.http.post<Staff>('http://localhost:3000/api/users/register', newStaff);
+  }
+
+  deleteStaff(staffId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${staffId}`);
+  }
+
+  updateStaff(staffId: string, staffData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${staffId}`, staffData);
   }
 
   assignStaff(problemId: string, staffId: string, staffName: string): Observable<any> {

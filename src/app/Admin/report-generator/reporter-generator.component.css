@@ -1,0 +1,52 @@
+.header{
+  color:var(--color);
+  font-size:large;
+}
+.filters{
+  background-color: white;
+  border-radius: 20px;
+  box-shadow:var(--box-shadow);
+  padding:40px;
+}
+select{
+  width:70%;
+  height: 30px;
+  border-radius: 20px;
+  border:1px solid var(--color);
+}
+.filter{
+  width:100%;
+}
+.filter>label{
+  color:var(--color);
+  margin-right: 50px;;
+}
+
+.report-table>h3{
+ text-align: center;
+ color:var(--color);
+}
+th{
+  color:var(--color);
+}
+td{
+  font-size:small;
+}
+
+.download-button
+{
+  display: flex;
+  background-color: white;
+  border-radius: 20px;
+  padding:20px ;
+  justify-content: space-around;
+  padding-right:50%;
+}
+.download-button>*{
+  width: 200px;
+  height:40px;
+  background-color: var(--color);
+  border:none;
+  border-radius:20px;
+  color:white;
+}

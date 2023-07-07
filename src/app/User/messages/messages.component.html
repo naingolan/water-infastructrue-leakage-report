@@ -1,0 +1,21 @@
+<h2>Messages</h2>
+
+<main>
+  <div class="all">
+    <div *ngFor = "let messages of messages" class="one" (click)="displayMessage(messages)">
+      <div class="image">
+        <mat-icon>message</mat-icon>
+      </div>
+      <div class="content">
+        <h4>{{messages.header}}</h4>
+        <h4>{{messages.createdAt}}</h4>
+      </div>
+    </div>
+
+  </div>
+  <div class="line"></div>
+  <div class="single">
+    <h4>{{selectedMessageHeader}}</h4>
+    <p>{{ selectedMessageContent }}</p>
+  </div>
+</main>

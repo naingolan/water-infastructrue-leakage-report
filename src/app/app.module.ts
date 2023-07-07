@@ -51,7 +51,10 @@ import { StaffSingleProblemComponent } from './Staff/single-problem/single-probl
 
 import { DashboardComponent } from './User/dashboard/dashboard.component';
 import { AnouncementComponent } from './Admin/anouncement/anouncement.component';
-import { ChartComponent } from './Admin/charts/charts.component';
+import { ChartComponent } from './Admin/chart/chart.component';
+import { StaffListComponent } from './Admin/staff-list/staff-list.component';
+import { MessagesComponent } from './User/messages/messages.component';
+import { ReportGeneratorComponent } from './Admin/report-generator/reporter-generator.component';
 
 
 
@@ -79,7 +82,10 @@ import { ChartComponent } from './Admin/charts/charts.component';
     SingleProblemComponent,
     DashboardComponent,
     AnouncementComponent,
-    ChartComponent
+    ChartComponent,
+    StaffListComponent,
+    MessagesComponent,
+    ReportGeneratorComponent,
   ],
   imports: [
     FormsModule,

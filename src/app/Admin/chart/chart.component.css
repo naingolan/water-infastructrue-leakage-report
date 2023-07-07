@@ -1,0 +1,9 @@
+div
+{
+  background-color: white;
+}
+.chart-container{
+  box-shadow: var(--box-shadow);
+  border-radius:20px;
+  
+}

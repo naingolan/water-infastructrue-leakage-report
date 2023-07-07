@@ -67,6 +67,7 @@ export class RegistrationComponent implements OnInit {
         }else if(role === 'staff'){
           this.router.navigate(['/staff'], { queryParams: { userId } });
         }else{
+          console.log("Here")
           this.router.navigate(['/admin'], { queryParams: { userId } });
         }
       },

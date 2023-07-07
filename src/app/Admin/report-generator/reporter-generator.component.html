@@ -1,0 +1,68 @@
+<div class="report-generator">
+  <h2 class="header">Problems Report</h2>
+  <div class="filters">
+  <div class="filter">
+    <label for="reportType">Report Type</label>
+    <select id="reportType" [(ngModel)]="selectedReportType" (change)="generateReport()">
+      <option value="daily">Daily</option>
+      <option value="weekly">Weekly</option>
+      <option value="monthly">Monthly</option>
+    </select>
+  </div>
+
+  <div #table class="report-table">
+    <h3>PROBLEMS CHECKLIST REPORT</h3>
+
+    <table mat-table [dataSource]="problemsDataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="No">
+        <th mat-header-cell *matHeaderCellDef>No</th>
+        <td mat-cell *matCellDef="let problem; let i = index">{{ i + 1 }}</td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>PROBLEM</th>
+        <td mat-cell *matCellDef="let problem">{{ problem.kind }}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="reportedBy">
+        <th mat-header-cell *matHeaderCellDef>REPORTER</th>
+        <td mat-cell *matCellDef="let problem">{{ problem.reportedBy.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>DATE</th>
+        <td mat-cell *matCellDef="let problem">{{ problem.reportedAt | date: 'dd-MM-YYYY'}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>STATUS</th>
+        <td mat-cell *matCellDef="let problem">{{ problem.status | uppercase}}</td>
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let problem; columns: displayedColumns;"></tr>
+    </table>
+
+
+
+
+
+  </div>
+</div>
+  <h2 class="header">Download Report</h2>
+  <div class="download-button">
+    <button (click)="generatePDF()">Download PDF</button>
+    <button (click)="generatePDF()">Download XLSX</button>
+  </div>
+
+<!--
+  <div class="report-preview" *ngIf="selectedProblem">
+    <h3>Problem Details</h3>
+    <p>ID: {{ selectedProblem.id }}</p>
+    <p>Name: {{ selectedProblem.name }}</p>
+    <p>Created At: {{ selectedProblem.createdAt }}</p>
+  </div> -->
+</div>

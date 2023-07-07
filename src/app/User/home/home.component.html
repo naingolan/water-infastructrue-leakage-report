@@ -3,7 +3,7 @@
         <mat-drawer #sidenav [mode]="isScreenSmall ? 'over' : 'side'" [opened]="!isScreenSmall">
             <mat-nav-list class="nav-list">
                 <img src="assets/dawasa2.png">
-                <a mat-list-item class="nav-list-item" routerLink="/receipt">
+                <a mat-list-item class="nav-list-item" routerLink="problem">
                     <button mat-icon-button class="display">
                       <mat-icon class="nav-list-icon">home</mat-icon>
                       <div class="nav-list-text">Home</div>
@@ -37,7 +37,7 @@
                     </button>
                 </a>
                 </mat-nav-list>
-              
+
         </mat-drawer>
         <mat-toolbar color="primary" class="custom-toolbar">
           <button  mat-button-toggle (click)="sidenav.toggle()">
@@ -48,7 +48,7 @@
             <mat-icon color="white">language</mat-icon>
           </button>
           <mat-menu #languageMenu="matMenu">
-            
+
           </mat-menu>
           <button mat-icon-button (click)="openUserOptions()">
             <mat-icon>exit_to_app</mat-icon>
@@ -59,4 +59,3 @@
         </div>
       </mat-drawer-container>
     </main>
-  

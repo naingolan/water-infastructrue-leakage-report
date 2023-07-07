@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/staff'], { queryParams: { userId } });
             }else{
               console.log(" I am going this way");
-              this.router.navigate(['/login'], { queryParams: { userId } });
+              this.router.navigate(['/admin'], { queryParams: { userId } });
             }
             // Store user data in the service
             this.userService.userData = userData; // Assign the userData to the userData property of the userService

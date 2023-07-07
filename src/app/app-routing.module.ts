@@ -16,6 +16,7 @@ import { StaffComponent } from './Staff/staff/home.component';
 import { StaffProblemsComponent } from './Staff/problem/app-problem.component';
 import { StaffSingleProblemComponent } from './Staff/single-problem/single-problem.component';
 import { DashboardComponent } from './User/dashboard/dashboard.component';
+import { ReportGeneratorComponent } from './Admin/report-generator/reporter-generator.component';
 
 const routes: Routes = [
    { path: 'login', component: LoginComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
     children: [
       { path: 'problem', component: AdminHomeDisplayComponent},
       { path: 'problem/:id', component: AdminSingleProblemComponent},
+      { path: 'report', component:ReportGeneratorComponent },
       { path: '', redirectTo: 'problem', pathMatch: 'full'}
     ]
     },
