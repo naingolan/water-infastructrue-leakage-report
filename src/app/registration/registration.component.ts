@@ -62,13 +62,13 @@ export class RegistrationComponent implements OnInit {
         this.problemService.fetchProblemKinds();
         const role = this.userService.getUserRole();
         console.log(role);
-        if (role === 'user') {
-          this.router.navigate(['/user'], { queryParams: { userId } });
+        if (role === 'admin') {
+          this.router.navigate(['/admin'], { queryParams: { userId } });
         }else if(role === 'staff'){
           this.router.navigate(['/staff'], { queryParams: { userId } });
         }else{
           console.log("Here")
-          this.router.navigate(['/admin'], { queryParams: { userId } });
+          this.router.navigate(['/user'], { queryParams: { userId } });
         }
       },
       (error) => {

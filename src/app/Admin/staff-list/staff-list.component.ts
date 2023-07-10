@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StaffService } from '../../staff.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-staff-list',
@@ -10,17 +11,26 @@ export class StaffListComponent implements OnInit {
   staffList: any[] = [];
   newStaff: any = {};
   integer: number = 1;
+  displayedColumns: string[] = ['no', 'name', 'email', 'phoneNumber'];
+  formErrors: any;
+
+
+
   constructor(private staffService: StaffService) {}
 
   ngOnInit(): void {
     this.loadStaffList();
   }
 
+  dataSource = new MatTableDataSource<any>([]);
+
   loadStaffList(): void {
     this.staffService.getStaffList().subscribe(
       (response: any) => {
         console.log(response);
         this.staffList = response;
+        this.dataSource.data = response; // Assign the response to the data source
+
       },
       (error: any) => {
         console.log('Error loading staff list:', error);
@@ -44,6 +54,8 @@ export class StaffListComponent implements OnInit {
       },
       (error: any) => {
         console.log('Error creating staff:', error);
+        this.formErrors.email = error.error.message; 
+
       }
     );
   }

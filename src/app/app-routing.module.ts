@@ -17,6 +17,10 @@ import { StaffProblemsComponent } from './Staff/problem/app-problem.component';
 import { StaffSingleProblemComponent } from './Staff/single-problem/single-problem.component';
 import { DashboardComponent } from './User/dashboard/dashboard.component';
 import { ReportGeneratorComponent } from './Admin/report-generator/reporter-generator.component';
+import { AnouncementComponent } from './Admin/anouncement/anouncement.component';
+import { StaffListComponent } from './Admin/staff-list/staff-list.component';
+import { MessagesComponent } from './User/messages/messages.component';
+import { UserAnouncementComponent } from './User/user-anouncements/user-anouncements.component';
 
 const routes: Routes = [
    { path: 'login', component: LoginComponent },
@@ -37,8 +41,10 @@ const routes: Routes = [
       children: [
         { path: 'problem', component: HomeDisplayComponent},
         { path: 'problem/:id', component: SingleProblemComponent},
+        { path: 'messages', component: MessagesComponent},
         { path: 'dashboard', component: DashboardComponent},
-        { path: '', redirectTo: 'dashboard', pathMatch: 'full'}
+        { path: 'anouncements', component: UserAnouncementComponent},
+        { path: '', redirectTo: 'problem', pathMatch: 'full'}
       ]
     },
     //path for admin
@@ -49,6 +55,8 @@ const routes: Routes = [
       { path: 'problem', component: AdminHomeDisplayComponent},
       { path: 'problem/:id', component: AdminSingleProblemComponent},
       { path: 'report', component:ReportGeneratorComponent },
+      { path: 'anouncement', component: AnouncementComponent},
+      { path: 'staff-list', component: StaffListComponent},
       { path: '', redirectTo: 'problem', pathMatch: 'full'}
     ]
     },

@@ -5,6 +5,7 @@ thead
 {
   box-shadow: var(box-shadow);
   height:40px;
+  color:var(--color);
 }
 table{
   width:80%;
@@ -70,4 +71,11 @@ mat-icon{
 }
 mat-icon:nth-child(2){
   color:var(--color);
+}
+
+.table{
+  background-color: white;
+  padding:20px;
+  border-radius: 20px;
+  box-shadow: var(--box-shadow);
 }

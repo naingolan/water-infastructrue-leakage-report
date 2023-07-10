@@ -82,25 +82,25 @@ export class AdminHomeDisplayComponent implements OnInit {
       this.problemsDataSource.paginator = this.paginator;
     });
   }
-  getStatusCellStyle(status: string): { [key: string]: string } {
-    let backgroundColor = '';
+  // getStatusCellStyle(status: string): { [key: string]: string } {
+  //   let backgroundColor = '';
 
-    switch (status) {
-      case 'pending':
-        backgroundColor = 'lightblue !important';
-        break;
-      case 'onprocess':
-        backgroundColor = 'yellow !important';
-        break;
-      case 'solved':
-        backgroundColor = 'lightgreen';
-        break;
-      default:
-        break;
-    }
+  //   switch (status) {
+  //     case 'pending':
+  //       backgroundColor = 'lightblue !important';
+  //       break;
+  //     case 'onprocess':
+  //       backgroundColor = 'yellow !important';
+  //       break;
+  //     case 'solved':
+  //       backgroundColor = 'lightgreen';
+  //       break;
+  //     default:
+  //       break;
+  //   }
 
-    return { 'background-color': backgroundColor };
-  }
+  //   return { 'background-color': backgroundColor };
+  // }
 
 
   fetchStaff(): void {

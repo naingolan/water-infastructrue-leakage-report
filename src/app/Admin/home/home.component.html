@@ -3,28 +3,28 @@
         <mat-drawer #sidenav [mode]="isScreenSmall ? 'over' : 'side'" [opened]="!isScreenSmall">
             <mat-nav-list class="nav-list">
                 <img src="assets/dawasa2.png">
-                <a mat-list-item class="nav-list-item" routerLink="/receipt">
+                <a mat-list-item class="nav-list-item" routerLink="/admin/problem">
                     <button mat-icon-button class="display">
                       <mat-icon class="nav-list-icon">home</mat-icon>
                       <div class="nav-list-text">Home</div>
                     </button>
                   </a>
 
-                <a mat-list-item class="nav-list-item" routerLink="/receipt">
+                <a mat-list-item class="nav-list-item" routerLink="/admin/staff-list">
                   <button mat-button-toggle class="display">
                     <mat-icon class="nav-list-icon">receipt</mat-icon>
                     <div class="nav-list-text">Staff</div>
                   </button>
                 </a>
 
-                <a mat-list-item class="nav-list-item" routerLink="/receipt">
+                <a mat-list-item class="nav-list-item" routerLink="/admin/anouncement">
                     <button mat-icon-button class="display">
                       <mat-icon class="nav-list-icon">bar_chart</mat-icon>
                       <div class="nav-list-text">Anouncements</div>
                     </button>
                 </a>
 
-                <a mat-list-item class="nav-list-item" routerLink="report">
+                <a mat-list-item class="nav-list-item" routerLink="/admin/report">
                     <button mat-icon-button class="display">
                       <mat-icon class="nav-list-icon">info</mat-icon>
                       <div class="nav-list-text">Reports</div>
@@ -58,7 +58,7 @@
             <!-- <app-staff-list></app-staff-list>
             <app-chart></app-chart>
             <app-anouncement></app-anouncement> -->
-           <router-outlet></router-outlet> 
+           <router-outlet></router-outlet>
         </div>
       </mat-drawer-container>
     </main>

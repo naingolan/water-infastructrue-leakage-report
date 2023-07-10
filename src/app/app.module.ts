@@ -55,6 +55,7 @@ import { ChartComponent } from './Admin/chart/chart.component';
 import { StaffListComponent } from './Admin/staff-list/staff-list.component';
 import { MessagesComponent } from './User/messages/messages.component';
 import { ReportGeneratorComponent } from './Admin/report-generator/reporter-generator.component';
+import { UserAnouncementComponent } from './User/user-anouncements/user-anouncements.component';
 
 
 
@@ -86,6 +87,7 @@ import { ReportGeneratorComponent } from './Admin/report-generator/reporter-gene
     StaffListComponent,
     MessagesComponent,
     ReportGeneratorComponent,
+    UserAnouncementComponent
   ],
   imports: [
     FormsModule,

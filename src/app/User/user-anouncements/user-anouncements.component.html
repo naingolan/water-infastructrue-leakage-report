@@ -1,0 +1,17 @@
+<main>
+  <div class="announcements">
+    <h2>Announcements</h2>
+
+    <div class="previous">
+
+      <ul>
+        <li *ngFor="let announcement of announcements">
+          <h3>{{ announcement.header | uppercase }}</h3>
+          <p>{{ announcement.content }}</p>
+          <p>{{ announcement.createdBy }}</p>
+          <p>{{announcement.timestamp | date:'EEEE, MMMM d YYYY HH:mm'}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</main>
