@@ -16,8 +16,12 @@ export class MessageService {
     return this.http.get(url);
   }
 
-  // Post a new message
-  postMessage(message: any): Observable<any> {
-    return this.http.post(this.baseUrl, message);
+  postMessage(userId: string, message: any): Observable<any> {
+    const body = {
+      userId,
+      message
+    };
+    return this.http.post(this.baseUrl, body);
   }
+  
 }

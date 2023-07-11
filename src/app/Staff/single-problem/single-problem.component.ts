@@ -12,7 +12,7 @@ import { StaffService } from 'src/app/staff.service';
 })
 export class StaffSingleProblemComponent {
   problem!: Problem;
-  problemId!: number;
+  problemId!: String;
   problemForm!: FormGroup;
 
   constructor(
@@ -30,7 +30,7 @@ export class StaffSingleProblemComponent {
 
   }
 
-  fetchProblemById(problemId:number): void {
+  fetchProblemById(problemId:String): void {
     this.problemService.fetchProblemById(problemId)
       .subscribe((problem: Problem) => {
         console.log(problem);

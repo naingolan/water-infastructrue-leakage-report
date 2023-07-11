@@ -1,0 +1,35 @@
+.user{
+  display:flex;
+  flex-direction:row;
+  background-color: white;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom:1px solid black;
+  margin:10px;
+  padding: 0 30px;
+}
+.second{
+  background-color: white;
+  border-radius: 20px;
+  padding:20px;
+  margin:20px 0;
+}
+label
+{
+  margin-right:50px;
+
+}
+mat-icon{
+  color:var(--color);
+}
+button{
+  background-color: white;
+  border:none;;
+}
+.first, .first>*{
+  background-color: white;
+  border-radius: 20px;
+  color:var(--color);
+  border:none;
+}

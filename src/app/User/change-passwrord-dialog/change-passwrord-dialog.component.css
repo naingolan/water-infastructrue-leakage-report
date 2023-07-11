@@ -1,0 +1,31 @@
+form
+{
+  padding:20px;
+}
+input{
+  margin:10px;
+  padding:10px;
+  border-radius: 20px;
+  border:1px solid var(--color);
+}
+button{
+  width:200px;
+  height:40px;
+  border-radius: 20px;
+  background-color: var(--color);
+  color:white;
+}
+form>div{
+  display:flex;
+  flex-direction: column
+}
+.buttons{
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-around;
+}
+
+h2{
+  color:var(--color);
+  text-align: center;
+}

@@ -10,7 +10,7 @@ main{
 }
 table {
     border-collapse: collapse;
-    width: 100%;
+    max-width:90%;
     box-shadow: var(--box-shadow);
     border-radius: 20px;
     padding:20px;
@@ -22,7 +22,7 @@ tbody{
 
   th, td {
     border: 2px solid none;
-    padding: 8px;
+    padding: 8px 4px;
     color:var(--color)
   }
 
@@ -72,6 +72,7 @@ tbody{
     color:white;
     height: 40px;
     margin-left:60%;
+  
 }
 mat-form-field{
     margin:20px;
@@ -106,4 +107,18 @@ mat-form-field>input{
   padding:20px;
   border-radius: 20px;
   box-shadow: var(--box-shadow);
+  width:fit-content;
+
+}
+
+.buttoner, .buttoner2{
+  background-color: white;
+  border:none;
+  color:var(--color);
+}
+.buttoner>mat-icon{
+  color:var(--color);
+}
+.buttoner2>mat-icon{
+  color:red;
 }

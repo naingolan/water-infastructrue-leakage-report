@@ -72,21 +72,36 @@ export class ProblemService {
     return this.http.get<Problem[]>(url, { headers });
   }
 
-  fetchProblemById(problemId: number): Observable<Problem> {
+  fetchProblemsById(userId: string): Observable<Problem[]> {
     const authToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${authToken}`
     });
-    const url = `${this.apiUrl}/problems/${problemId}`;
-    return this.http.get<Problem>(url, { headers });
+    const url = `${this.apiUrl}/problems/${userId}`;
+    return this.http.get<Problem[]>(url, { headers });
   }
 
-  deleteProblem(problemId: number): Observable<any> {
-    const url = `${this.apiUrl}/problems/${problemId}`;
-    return this.http.delete(url);
+
+  fetchProblemById(problemId: String): Observable<any> {
+    const authToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${authToken}`
+    });
+    const url = `${this.apiUrl}/singleproblem/${problemId}`;
+    return this.http.get<any>(url, { headers });
   }
 
-  updateProblem(problemId: number, description: string): Observable<Problem> {
+  deleteProblem(problemId: string): Observable<any> {
+    const authToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${authToken}`
+    });
+
+    const url = `${this.apiUrl}/${problemId}`;
+    return this.http.delete(url, { headers });
+  }
+
+  updateProblem(problemId: string, description: string): Observable<Problem> {
     const url = `${this.apiUrl}/${problemId}`;
     const body = { description };
     return this.http.put<Problem>(url, body);

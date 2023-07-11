@@ -21,10 +21,14 @@ import { AnouncementComponent } from './Admin/anouncement/anouncement.component'
 import { StaffListComponent } from './Admin/staff-list/staff-list.component';
 import { MessagesComponent } from './User/messages/messages.component';
 import { UserAnouncementComponent } from './User/user-anouncements/user-anouncements.component';
+import { UserAccountComponent } from './User/user-account/user-account.component';
+import { MapComponent } from './User/map/map.component';
+import { ChangePasswordComponent } from './Staff/change-password/change-password.component';
 
 const routes: Routes = [
    { path: 'login', component: LoginComponent },
    { path: 'registration', component: RegistrationComponent},
+   { path: 'staffpassword', component: ChangePasswordComponent},
   //  {
   //   path: 'home',
   //   component: HomeComponent,
@@ -44,6 +48,8 @@ const routes: Routes = [
         { path: 'messages', component: MessagesComponent},
         { path: 'dashboard', component: DashboardComponent},
         { path: 'anouncements', component: UserAnouncementComponent},
+        { path: 'account', component: UserAccountComponent},
+        { path: 'map', component: MapComponent},
         { path: '', redirectTo: 'problem', pathMatch: 'full'}
       ]
     },

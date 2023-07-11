@@ -9,6 +9,7 @@ export class UserService {
 
   userData: any;
   private userCreated = new BehaviorSubject<boolean>(false);
+  apiUrl = 'http://localhost:3000/api/users';
 
   constructor(private http: HttpClient) { }
 
@@ -48,5 +49,12 @@ export class UserService {
     return this.userData;
   }
 
+  //Change password
+  changePassword(userId: string, oldPassword: string, newPassword: string): Observable<any> {
+    const url = `${this.apiUrl}/update/password/${userId}`;
+    const payload = { userId, oldPassword, newPassword };
+
+    return this.http.patch(url, payload);
+  }
 
 }

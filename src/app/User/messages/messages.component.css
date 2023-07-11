@@ -70,3 +70,31 @@ h2{
   color:var(--color);
   font-size: medium;
 }
+
+.reply{
+  display: flex;
+  flex-direction: column;
+  vertical-align: bottom;
+  margin-bottom:0;
+  justify-content:baseline;
+
+}
+.reply>input{
+  width:100%;
+  border-radius:20px;
+  border:1px solid var(--color);
+  background-color: white;
+  height: 60px;
+
+}
+.reply>button{
+  width:40%;
+  border-radius:20px;
+  color:white;
+  height:40px;
+  border:none;
+  background-color: var(--color);
+  margin:10px 0;
+  align-self:flex-end;
+  
+}

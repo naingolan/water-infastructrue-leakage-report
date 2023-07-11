@@ -17,5 +17,11 @@
   <div class="single">
     <h4>{{selectedMessageHeader}}</h4>
     <p>{{ selectedMessageContent }}</p>
+
+  <form (submit)="sendReply()" class="reply">
+
+    <input type="text" [(ngModel)]="reply" placeholder="Reply">
+    <button (click)="sendReply()">Send</button>
+  </form>
   </div>
 </main>

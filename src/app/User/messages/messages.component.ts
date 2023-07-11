@@ -8,11 +8,13 @@ import { MessageService } from '../../message.service';
 })
 export class MessagesComponent implements OnInit {
   messages: any[] = [];
+  reply: any;
 
   constructor(private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.fetchMessages();
+    this.reply= '';
   }
 
   fetchMessages(): void {
@@ -28,23 +30,40 @@ export class MessagesComponent implements OnInit {
     );
   }
 
-  postMessage(): void {
-    const newMessage = {
-      content: 'New message content',
-      sender: 'sender-id',
-      receiver: 'receiver-id',
-      createdAt: new Date()
-    };
+  // postMessage(): void {
+  //   const newMessage = {
+  //     content: 'New message content',
+  //     sender: 'sender-id',
+  //     receiver: 'receiver-id',
+  //     createdAt: new Date()
+  //   };
 
-    this.messageService.postMessage(newMessage).subscribe(
+  //   this.messageService.postMessage(newMessage).subscribe(
+  //     (response) => {
+  //       console.log('Message posted successfully:', response);
+  //     },
+  //     (error) => {
+  //       console.log('Error posting message:', error);
+  //     }
+  //   );
+  // }
+  sendReply() {
+    const userId = localStorage.getItem('uuid')?.toString()
+    const reply = this.reply
+    if(userId){
+    this.messageService.postMessage(
+      userId,
+      reply
+    ).subscribe(
       (response) => {
-        console.log('Message posted successfully:', response);
+        console.log(response);
       },
       (error) => {
-        console.log('Error posting message:', error);
+        console.error(error);
       }
     );
   }
+ }
 
   selectedMessageContent: string = '';
   selectedMessageHeader: string = '';

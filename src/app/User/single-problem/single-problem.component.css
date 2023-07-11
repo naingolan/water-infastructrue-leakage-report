@@ -1,6 +1,6 @@
 main{
     display:flex;
-    flex-direction:row;
+    flex-direction:column;
     width: 100%;
     justify-content: space-between;
 }
@@ -11,11 +11,19 @@ main{
     border-radius: 20px;
     padding:20px;
     align-items: center;
+    margin:20px 10px;
 }
 .location{
     background-color:white;
-    width:500px;
     height:500px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.15);
     border-radius:20px;
+    margin:20px 10px;
+}
+
+h2{
+  margin: 5px;
+  color:var(--color);
+  font-size: medium;
+  padding:10px;
 }

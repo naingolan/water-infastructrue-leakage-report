@@ -24,6 +24,7 @@ main{
     background-color:var(--background-color);
     padding:0 5vw;
     height: 100%;;
+    background-color: var(--background-color);
 }
 table {
     border-collapse: collapse;
@@ -245,4 +246,24 @@ button:disabled {
 }
 .report-form>img{
 
+}
+
+.location>button{
+  background-color:var(--color);
+}
+textarea
+{
+  border-radius: 20px;
+  height:60px;
+  padding:10px;
+  border:1px solid var(--color);
+  width:95%;
+
+}
+.table{
+  border-radius: 20px;
+  background-color: white;
+  padding:20px;
+  box-shadow: var(--box-shadow);
+  width:fit-content;
 }

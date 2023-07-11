@@ -1,5 +1,7 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { map } from 'rxjs';
+import { Problem, ProblemService } from 'src/app/problem.service';
 
 @Component({
   selector: 'app-chart',
@@ -8,12 +10,32 @@ import Chart from 'chart.js/auto';
 })
 export class ChartComponent implements AfterViewInit {
   @ViewChild('myChartCanvas') myChartCanvas!: ElementRef<HTMLCanvasElement>;
+  pending!: number;
+  onProcess!: number;
+  solved!: number;
+  constructor(
+    private problemService: ProblemService,
+    
+  ){
 
+  }
   ngAfterViewInit(): void {
-    this.createChart();
+    this.fetchProblems()
   }
 
-  createChart(): void {
+
+  fetchProblems(): void {
+    this.problemService.fetchProblems().pipe(
+      map((problems: Problem[]) => problems.reverse())
+    ).subscribe((problems: Problem[]) => {
+      this.pending = problems.filter((problem: Problem) => problem.status === 'pending').length;
+      this.onProcess = problems.filter((problem: Problem) => problem.status === 'on process').length;
+      this.solved = problems.filter((problem: Problem) => problem.status === 'solved').length;
+      this.createChart(this.pending, this.onProcess, this.solved)
+    });
+  }
+
+  createChart(pending:number, onProcess:number, solved:number): void {
     const ctx = this.myChartCanvas.nativeElement.getContext('2d');
     if (ctx) {
       new Chart(ctx, {
@@ -23,7 +45,7 @@ export class ChartComponent implements AfterViewInit {
           datasets: [
             {
               label: "Problem Status",
-              data: [467, 576, 572],
+              data: [pending, onProcess, solved],
               backgroundColor: ['orange', 'yellow', 'green']
             }
           ]

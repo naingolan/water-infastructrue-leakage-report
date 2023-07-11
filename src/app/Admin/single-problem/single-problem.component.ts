@@ -10,7 +10,7 @@ import { Observable, map } from 'rxjs';
 })
 export class AdminSingleProblemComponent {
   problem!: Problem;
-  problemId!: number;
+  problemId!: String;
 
   constructor(
     private problemService: ProblemService,
@@ -24,7 +24,7 @@ export class AdminSingleProblemComponent {
 
   }
 
-  fetchProblemById(problemId:number): void {
+  fetchProblemById(problemId:String): void {
     this.problemService.fetchProblemById(problemId)
       .subscribe((problem: Problem) => {
         this.problem = problem;

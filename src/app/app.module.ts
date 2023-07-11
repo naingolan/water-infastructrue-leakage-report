@@ -56,8 +56,12 @@ import { StaffListComponent } from './Admin/staff-list/staff-list.component';
 import { MessagesComponent } from './User/messages/messages.component';
 import { ReportGeneratorComponent } from './Admin/report-generator/reporter-generator.component';
 import { UserAnouncementComponent } from './User/user-anouncements/user-anouncements.component';
-
-
+import { UserAccountComponent } from './User/user-account/user-account.component';
+import { ChangePasswrordDialogComponent } from './User/change-passwrord-dialog/change-passwrord-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder,  Validators } from '@angular/forms';
+import { MapComponent } from './User/map/map.component';
+import { ChangePasswordComponent } from './Staff/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +91,11 @@ import { UserAnouncementComponent } from './User/user-anouncements/user-anouncem
     StaffListComponent,
     MessagesComponent,
     ReportGeneratorComponent,
-    UserAnouncementComponent
+    UserAnouncementComponent,
+    UserAccountComponent,
+    ChangePasswrordDialogComponent,
+    MapComponent,
+    ChangePasswordComponent
   ],
   imports: [
     FormsModule,
@@ -110,7 +118,10 @@ import { UserAnouncementComponent } from './User/user-anouncements/user-anouncem
     MatRadioModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+
+
   ],
   providers: [
     //{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }

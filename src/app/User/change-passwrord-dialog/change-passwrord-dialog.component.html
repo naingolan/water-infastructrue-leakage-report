@@ -1,0 +1,19 @@
+<h2>Change Password</h2>
+<form (ngSubmit)="changePasswordFormSubmit()" #changePasswordForm="ngForm">
+  <div>
+    <label>Old Password:</label>
+    <input type="password" name="oldPassword" [(ngModel)]="oldPassword" required>
+  </div>
+  <div>
+    <label>New Password:</label>
+    <input type="password" name="newPassword" [(ngModel)]="newPassword" required>
+  </div>
+  <div>
+    <label>Confirm New Password:</label>
+    <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required>
+  </div>
+  <div class="buttons">
+    <button type="button" (click)="closeDialog()">Cancel</button>
+    <button type="submit" [disabled]="changePasswordForm.invalid">Save</button>
+  </div>
+</form>
