@@ -69,7 +69,7 @@ input{
     background-color: white!important;
 }
 
-
+/* 
 .upper-logo{
     width:250px;
     height: 30vh;
@@ -79,4 +79,15 @@ input{
     padding-bottom: 0;
     margin-top:0;
     padding:0;
+} */
+
+.upper-logo{
+  margin-top:30px;
+  width:30%;
+  height: 40vh;
+  align-self: center;
+  margin-left:33%;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding:0;
 }

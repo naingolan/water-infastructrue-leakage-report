@@ -129,7 +129,7 @@
   <!-- Description Column -->
   <ng-container matColumnDef="location">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>LOCATION</th>
-    <td mat-cell *matCellDef="let problem">{{removeFirstWord(problem.location)}}</td>
+    <td mat-cell *matCellDef="let problem">{{removeFirstWord(problem.location)|| ''}}</td>
   </ng-container>
 
   <!-- Reported By Column -->

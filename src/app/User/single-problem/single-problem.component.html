@@ -7,24 +7,27 @@
                 <div class="details-body-left-image">
                     <img src="{{ problem.imageSrc }}" alt="Problem Image">
                 </div>
-                <div class="details-body-left-description">
-                    <p>{{ problem.description }}</p>
-                </div>
+
             </div>
-            <div class="details-body-right">
+            <!-- <div class="details-body-right">
+              <div class="details-body-right-description">
+                <h2>Description</h2>
+                <p>{{ problem.description }}</p>
+            </div>
                 <div class="details-body-right-status">
-                    <p>Status: {{ problem.status }}</p>
+                    <h2>Status</h2>
+                    <p> {{ problem.status }}</p>
                 </div>
                 <div class="details-body-right-reported-by">
-                    <p>Reported By: {{ problem.reportedBy?.name }}</p>
+                    <p> {{ problem.reportedBy?.name }}</p>
                 </div>
                 <div class="details-body-right-reported-by">
                   <p>Contacts: {{ problem.reportedBy?.phoneNumber }}</p>
               </div>
                 <div class="details-body-right-reported-at">
-                    <p>Reported At: {{ problem.reportedAt   }}</p>
+                    <p>Reported At: {{ problem.location   }}</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <h2> Location on Map</h2>

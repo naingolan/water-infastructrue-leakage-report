@@ -79,16 +79,21 @@ export class ReportGeneratorComponent implements OnInit {
   }
 
   isProblemCreatedThisWeek(createdAt: string): boolean {
-    // Implement the logic to check if the problem was created within this week
-    const today = new Date().toISOString().substr(0, 10);
-    return createdAt === today;
+    const today = new Date();
+    const problemDate = new Date(createdAt);
+    const startOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
+    const endOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (6 - today.getDay()));
+    return problemDate >= startOfWeek && problemDate <= endOfWeek;
   }
+  
 
   isProblemCreatedThisMonth(createdAt: string): boolean {
-    // Implement the logic to check if the problem was created within this month
-    const today = new Date().toISOString().substr(0, 10);
-    return createdAt === today;
+    const today = new Date();
+    const problemDate = new Date(createdAt);
+  
+    return problemDate.getMonth() === today.getMonth() && problemDate.getFullYear() === today.getFullYear();
   }
+  
 
   generatePDF(): void {
     const doc = new jsPDF();
