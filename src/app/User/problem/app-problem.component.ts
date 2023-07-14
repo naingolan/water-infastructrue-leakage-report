@@ -67,7 +67,7 @@ export class HomeDisplayComponent implements OnInit {
 
   initForm(): void {
     this.problemForm = this.formBuilder.group({
-      kind: ['', Validators.required],
+      //kind: ['', Validators.required],
       image: ['', Validators.required],
       description: ['', Validators.required]
     });
@@ -103,7 +103,9 @@ export class HomeDisplayComponent implements OnInit {
     if(userId){
     this.problemService.fetchProblemsById(userId).pipe(
       map((problems: Problem[]) => problems.reverse())
+
     ).subscribe((problems: Problem[]) => {
+      console.log(problems)
       //problems = this.locationInfo;
       this.problemsDataSource.data = problems;
       this.problemsDataSource.sort = this.sort;
@@ -151,14 +153,14 @@ export class HomeDisplayComponent implements OnInit {
     const options = {
       enableHighAccuracy: true
     };
-  
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         console.log(position);
         this.latitudeObtained = position.coords.latitude;
         this.longitudeObtained = position.coords.longitude;
         this.remedyFunction(this.latitudeObtained, this.longitudeObtained);
-  
+
       },
       (error) => {
         console.log('Error occurred while retrieving location:', error);
@@ -166,8 +168,8 @@ export class HomeDisplayComponent implements OnInit {
       options
     );
   }
-  
-  
+
+
   onImageChange(event: any): void {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -186,8 +188,8 @@ export class HomeDisplayComponent implements OnInit {
       return;
     }
     const reporterId = localStorage.getItem('uuid') || '';
-    const latitude = this.latitudeObtained;
-    const longitude = this.longitudeObtained;
+    const latitude = -6.814172;
+    const longitude = 39.293389;
     const imageSrc = this.imageSrc;
 
     this.getLocation(this.latitudeObtained, this.longitudeObtained);
@@ -206,6 +208,9 @@ export class HomeDisplayComponent implements OnInit {
         this.fetchProblems();
         this.problemForm.get('image')!.setValue('');
         this.problemForm.reset();
+        this.imageSrc = '';
+        this.selectedImage = '';
+
         console.log("Imekaa sawa");
       },
       (error)=>{
@@ -240,15 +245,15 @@ export class HomeDisplayComponent implements OnInit {
   //     })
   //   );
   // }
-  
 
 
-  
+
+
   getLocation(latitude: number, longitude: number): Observable<string> {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyAuC-zLWbKCbkgZ1UUBlva6iARfqaipGfU`;
     console.log("You are here again");
     console.log(latitude, longitude);
-    
+
     return this.http.get(url).pipe(
       tap((response: any) => {
         console.log(response);

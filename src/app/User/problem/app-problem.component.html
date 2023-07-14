@@ -7,12 +7,12 @@
     </div>
     <div *ngIf="!showForm">
       <form class="report-form" [formGroup]="problemForm" (ngSubmit)="onSubmit()">
-        <div class="report">
+        <!-- <div class="report">
             <label for="kind">Kind:</label>
             <select id="kind" formControlName="kind" required>
               <option *ngFor="let kind of problemKinds" [value]="kind">{{ kind }}</option>
             </select>
-          </div>
+          </div> -->
 
 
           <label>Upload Image</label>
@@ -37,8 +37,8 @@
         </div>
 
         <div class="submit">
-          <button type="submit" [disabled]="problemForm.invalid">Submit</button>
-        </div>
+        <button type="button" (click)="onSubmit()">Submit</button>
+      </div>
       </form>
 
     </div>
