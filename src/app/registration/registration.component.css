@@ -60,7 +60,7 @@ input{
     flex-direction: column;
 
 }
-  
+
 input{
     width:30vw;
     height:30px;
@@ -69,7 +69,7 @@ input{
     background-color: white!important;
 }
 
-/* 
+/*
 .upper-logo{
     width:250px;
     height: 30vh;
@@ -90,4 +90,21 @@ input{
   margin-bottom: 0;
   padding-bottom: 0;
   padding:0;
+}
+
+.name{
+  display: flex;
+  flex-direction:row;
+
+}
+.name>*{
+  width:100% ! important;
+
+}
+.name>*>*{
+  width:80% ! important;
+}
+.error{
+  color:red !important;
+  font-size:small;
 }

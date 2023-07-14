@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { ProblemService } from '../problem.service';
 
@@ -12,14 +12,29 @@ interface RegistrationResponse {
   token:string;
 }
 
+// export const passwordMatchValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+//   const password = control.get('password');
+//   const confirmPassword = control.get('confirmPassword');
+
+//   if (password && confirmPassword && password.value !== confirmPassword.value) {
+//     return { passwordMismatch: true };
+//   }
+
+//   return null;
+// };
+
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+
 export class RegistrationComponent implements OnInit {
   registrationForm!: FormGroup;
+  invalidForm: boolean = true;
+  isClicked: boolean = false;
+  error: any = null;
 
   constructor(
     private http: HttpClient,
@@ -29,21 +44,42 @@ export class RegistrationComponent implements OnInit {
     private problemService: ProblemService
     ) {}
 
+
+
+
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required],
-    });
+    },
+    //{ validator: passwordMatchValidator }
+    );
   }
 
   register() {
     if (this.registrationForm.invalid) {
+      this.invalidForm = true;
+      return;
+    }
+    if(this.registrationForm.value.password != this.registrationForm.value.confirmPassword){
+      this.invalidForm = true;
       return;
     }
 
-    const userData = this.registrationForm.value;
+  const firstName = this.registrationForm.value.firstName;
+  const lastName = this.registrationForm.value.lastName;
+  const name = `${firstName} ${lastName}`;
+
+  const userData = {
+    ...this.registrationForm.value,
+    name: name
+  };
+
+
     this.http.post<RegistrationResponse>('http://localhost:3000/api/users/register', userData).subscribe(
       (response) => {
         this.userService.updateUserCreatedStatus(true);
@@ -73,6 +109,8 @@ export class RegistrationComponent implements OnInit {
       },
       (error) => {
         console.error('Failed to register user:', error);
+        this.error = error.error.error;
+        console.log(error.message);
         // Add any error handling logic here
       }
     );
