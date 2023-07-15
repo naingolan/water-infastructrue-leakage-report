@@ -44,10 +44,6 @@ export class UserService {
   updateUserCreatedStatus(isLogged: boolean): void {
     this.userCreated.next(isLogged);
   }
-  // Get the stored user data
-  getUserData(): any {
-    return this.userData;
-  }
 
   //Change password
   changePassword(userId: string, oldPassword: string, newPassword: string): Observable<any> {
