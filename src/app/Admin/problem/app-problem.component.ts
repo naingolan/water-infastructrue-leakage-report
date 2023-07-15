@@ -26,6 +26,7 @@ declare var google: any;
 export class AdminHomeDisplayComponent implements OnInit {
 
   problemsDataSource: MatTableDataSource<Problem> = new MatTableDataSource<Problem>();
+  awaitDataSource: MatTableDataSource<Problem> = new MatTableDataSource<Problem>();
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   problems$!: Observable<Problem[]>
@@ -50,6 +51,7 @@ export class AdminHomeDisplayComponent implements OnInit {
 
   //form
   @ViewChild('formRef') formRef!: NgForm;
+
 
 
   constructor(
@@ -80,6 +82,10 @@ export class AdminHomeDisplayComponent implements OnInit {
       this.problemsDataSource.data = problems;
       this.problemsDataSource.sort = this.sort;
       this.problemsDataSource.paginator = this.paginator;
+
+      this.awaitDataSource.data = problems.filter((problem: Problem) => problem.adminApproval === 'approved');
+      this.awaitDataSource.sort = this.sort;
+      this.awaitDataSource.paginator = this.paginator;
     });
   }
   // getStatusCellStyle(status: string): { [key: string]: string } {
@@ -102,11 +108,23 @@ export class AdminHomeDisplayComponent implements OnInit {
   //   return { 'background-color': backgroundColor };
   // }
 
+  updateProblemSolution(problemId: string): void {
+    this.staffService.updateProblemSolution(problemId, "approve").subscribe(
+      (response) => {
+        console.log(response);
+        this.fetchProblems();
+        this.fetchStaff();
+      },
+      (error) => {
+        console.log('Error updating problem solution:', error);
+      }
+    );
+  }
 
   fetchStaff(): void {
     this.staffService.getStaffList().subscribe(
       (staffList: Staff[]) => {
-        this.staffList = staffList;
+        this.staffList = staffList.filter((staff: Staff) => staff.staffStatus === 'available');
         console.log(staffList);
       },
       (error) => {
@@ -134,6 +152,8 @@ export class AdminHomeDisplayComponent implements OnInit {
         this.staffService.assignStaff(problemId, staffId, staffName).subscribe(
           (response) => {
             console.log('Assigned staff successfully');
+            this.fetchProblems();
+            this.fetchStaff();
           },
           (error) => {
             console.log('Error assigning staff:', error);
@@ -141,10 +161,10 @@ export class AdminHomeDisplayComponent implements OnInit {
         );
       }
     }
-    setTimeout(() => {
-      this.formRef.resetForm();
-      window.location.reload();
-    }, 500);
+    // setTimeout(() => {
+    this.formRef.resetForm();
+    //   window.location.reload();
+    // }, 500);
   }
 
 
@@ -157,35 +177,36 @@ export class AdminHomeDisplayComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    if (this.problemForm.invalid) {
-      return;
-    }
-    const reporterId = localStorage.getItem('uuid') || '';
-    const latitude = this.latitudeObtained;
-    const longitude = this.longitudeObtained;
-    const imageSrc = this.imageSrc;
+  // onSubmit(): void {
+  //   if (this.problemForm.invalid) {
+  //     return;
+  //   }
+  //   const reporterId = localStorage.getItem('uuid') || '';
+  //   const latitude = this.latitudeObtained;
+  //   const longitude = this.longitudeObtained;
+  //   const imageSrc = this.imageSrc;
 
-    const problem: Problem = {
-      kind: this.problemForm.value.kind,
-      imageSrc: imageSrc,
-      description: this.problemForm.value.description,
-      reporter: reporterId,
-      latitude: latitude,
-      longitude: longitude,
-    };
-    this.problemService.reportProblem(problem).subscribe(
-      ()=>{
-        this.fetchProblems();
-        this.problemForm.get('image')!.setValue('');
-        this.problemForm.reset();
-        console.log("Imekaa sawa");
-      },
-      (error)=>{
-        console.log("Bado sana");
-      }
-    );
-  }
+  //   const problem: Problem = {
+  //     kind: this.problemForm.value.kind,
+  //     imageSrc: imageSrc,
+  //     description: this.problemForm.value.description,
+  //     reporter: reporterId,
+  //     latitude: latitude,
+  //     longitude: longitude,
+  //     adminApproval: ''
+  //   };
+  //   this.problemService.reportProblem(problem).subscribe(
+  //     ()=>{
+  //       this.fetchProblems();
+  //       this.problemForm.get('image')!.setValue('');
+  //       this.problemForm.reset();
+  //       console.log("Imekaa sawa");
+  //     },
+  //     (error)=>{
+  //       console.log("Bado sana");
+  //     }
+  //   );
+  // }
 
 
 

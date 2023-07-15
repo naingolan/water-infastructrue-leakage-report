@@ -39,7 +39,8 @@ export class AdminProblemDisplayComponent implements OnInit {
         name: this.staffForm.value.name,
         position: this.staffForm.value.position,
         department: this.staffForm.value.department,
-        salary: this.staffForm.value.salary
+        salary: this.staffForm.value.salary,
+        staffStatus: 'available',
       };
       console.log(newStaff);
       this.staffService.createStaff(newStaff).subscribe(

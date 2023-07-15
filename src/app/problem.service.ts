@@ -9,6 +9,7 @@ export interface reportedBy{
     phoneNumber?:string;
 }
 export interface Problem {
+  adminApproval: string;
   _id?: any;
   id?: number;
   kind: ProblemKind;

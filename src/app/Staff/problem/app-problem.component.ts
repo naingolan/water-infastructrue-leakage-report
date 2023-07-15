@@ -129,35 +129,36 @@ export class StaffProblemsComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  onSubmit(): void {
-    if (this.problemForm.invalid) {
-      return;
-    }
-    const reporterId = localStorage.getItem('uuid') || '';
-    const latitude = this.latitudeObtained;
-    const longitude = this.longitudeObtained;
-    const imageSrc = this.imageSrc;
+  // onSubmit(): void {
+  //   if (this.problemForm.invalid) {
+  //     return;
+  //   }
+  //   const reporterId = localStorage.getItem('uuid') || '';
+  //   const latitude = this.latitudeObtained;
+  //   const longitude = this.longitudeObtained;
+  //   const imageSrc = this.imageSrc;
 
-    const problem: Problem = {
-      kind: this.problemForm.value.kind,
-      imageSrc: imageSrc,
-      description: this.problemForm.value.description,
-      reporter: reporterId,
-      latitude: latitude,
-      longitude: longitude,
-    };
-    this.problemService.reportProblem(problem).subscribe(
-      ()=>{
-        this.fetchProblems();
-        this.problemForm.get('image')!.setValue('');
-        this.problemForm.reset();
-        console.log("Imekaa sawa");
-      },
-      (error)=>{
-        console.log("Bado sana");
-      }
-    );
-  }
+  //   const problem: Problem = {
+  //     adminApproval: 'pending'
+  //     kind: this.problemForm.value.kind,
+  //     imageSrc: imageSrc,
+  //     description: this.problemForm.value.description,
+  //     reporter: reporterId,
+  //     latitude: latitude,
+  //     longitude: longitude,
+  //   };
+  //   this.problemService.reportProblem(problem).subscribe(
+  //     ()=>{
+  //       this.fetchProblems();
+  //       this.problemForm.get('image')!.setValue('');
+  //       this.problemForm.reset();
+  //       console.log("Imekaa sawa");
+  //     },
+  //     (error)=>{
+  //       console.log("Bado sana");
+  //     }
+  //   );
+  // }
 
 
 

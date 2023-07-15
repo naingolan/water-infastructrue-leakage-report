@@ -193,6 +193,7 @@ export class HomeDisplayComponent implements OnInit {
     this.getLocation(this.latitudeObtained, this.longitudeObtained);
 
     const problem: Problem = {
+      adminApproval: 'pending',
       kind: this.problemForm.value.kind,
       imageSrc: imageSrc,
       description: this.problemForm.value.description,

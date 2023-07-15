@@ -13,7 +13,7 @@ export class StaffListComponent implements OnInit {
   integer: number = 1;
   displayedColumns: string[] = ['no', 'name', 'email', 'phoneNumber'];
   formErrors: any;
-
+  dataSource = new MatTableDataSource<any>([])
 
 
   constructor(private staffService: StaffService) {}
@@ -22,15 +22,13 @@ export class StaffListComponent implements OnInit {
     this.loadStaffList();
   }
 
-  dataSource = new MatTableDataSource<any>([]);
 
   loadStaffList(): void {
     this.staffService.getStaffList().subscribe(
       (response: any) => {
         console.log(response);
-        this.staffList = response;
         this.dataSource.data = response; // Assign the response to the data source
-
+        //console.log(this.dataSource.data);
       },
       (error: any) => {
         console.log('Error loading staff list:', error);
@@ -54,7 +52,7 @@ export class StaffListComponent implements OnInit {
       },
       (error: any) => {
         console.log('Error creating staff:', error);
-        this.formErrors.email = error.error.message; 
+        this.formErrors.email = error.error.message;
 
       }
     );

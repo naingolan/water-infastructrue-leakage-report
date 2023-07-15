@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 
 export interface Staff{
+  staffStatus: string;
   _id?: number;
   name: string;
   position: string;
@@ -46,15 +47,16 @@ export class StaffService {
       staffId: staffId,
       staffName: staffName
     };
-    return this.http.put<any>(`${this.apiUrl}/${problemId}/assign`, payload)
-    .pipe(
-      tap(() => {
-        // Reload the current page
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate([this.router.url]);
-        });
-      }));
+    return this.http.put<any>(`${this.apiUrl}/${problemId}/assign`, payload);
+    // .pipe(
+    //   tap(() => {
+    //     // Reload the current page
+    //     // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    //     //   this.router.navigate([this.router.url]);
+    //     // });
+    //   }));
   }
+
 
   getAssignedProblems(staffId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/assigned/${staffId}`);
@@ -69,5 +71,16 @@ export class StaffService {
 
     return this.http.put(url, body);
   }
+
+  updateProblemSolution(id: string, status: string): Observable<any> {
+    const url = `${this.apiUrl}/${id}/solved`;
+    const body = {
+      status,
+    };
+
+    return this.http.put(url, body);
+  }
+
+
 
 }

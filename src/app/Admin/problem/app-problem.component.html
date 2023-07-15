@@ -4,6 +4,93 @@
   <app-chart></app-chart>
 </div>
 <div class="problems">
+<h2>Problems Waiting for Approval</h2>
+<div class="table">
+  <table mat-table [dataSource]="awaitDataSource" matSort>
+
+    <!-- No Column -->
+    <ng-container matColumnDef="no">
+      <th mat-header-cell *matHeaderCellDef>No</th>
+      <td mat-cell *matCellDef="let problem; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <!-- Kind Column -->
+    <ng-container matColumnDef="kind">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>NAME</th>
+      <td mat-cell *matCellDef="let problem"><img [src]="problem.imageSrc"></td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let problem">{{ problem.description }}</td>
+    </ng-container>
+
+    <!-- Reported By Column -->
+    <ng-container matColumnDef="reportedBy">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>REPORTER</th>
+      <td mat-cell *matCellDef="let problem">{{ problem.reportedBy?.name }}</td>
+    </ng-container>
+
+    <!-- Reported At Column -->
+    <ng-container matColumnDef="reportedAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>TIME</th>
+      <td mat-cell *matCellDef="let problem">{{ problem.reportedAt | date:'EEEE, MMMM d YYYY HH:mm' }}</td>
+    </ng-container>
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>STATUS</th>
+    <td mat-cell *matCellDef="let problem" >
+      {{ problem.status | uppercase }}
+    </td>
+  </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>PREVIEW</th>
+      <td mat-cell *matCellDef="let problem">
+        <button mat-icon-button class="buttoner" (click)="viewProblem(problem._id)">
+          <mat-icon >visibility</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="assignedTo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ASSIGNED</th>
+      <td mat-cell *matCellDef="let problem">
+        <form [formGroup]="problemForm" #formRef="ngForm">
+          <ng-container *ngIf="!problem.assignedTo">
+            <select formControlName="assignedTo" (change)="onStaffSelectionChange(problem._id); formRef.ngSubmit.emit()">
+              <option value="" disabled selected>Select Staff</option>
+              <option *ngFor="let staff of staffList" [value]="staff._id">{{ staff.name }}</option>
+            </select>
+            <button type="submit" hidden class="hidden-button" [disabled]="true"></button>
+          </ng-container>
+          <ng-container *ngIf="problem.assignedTo">
+            {{ problem.assignedTo.name }}
+          </ng-container>
+        </form>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="adminApproval">
+      <th mat-header-cell *matHeaderCellDef>APPROVE</th>
+      <td mat-cell *matCellDef="let problem">
+        <button mat-icon-button class="buttoner2" (click)="updateProblemSolution(problem._id)">
+          <mat-icon color="darkblue" style="color:darkblue">done</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Table Rows -->
+    <tr mat-header-row *matHeaderRowDef="['no', 'kind', 'reportedBy', 'reportedAt', 'status','actions','assignedTo', 'adminApproval']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['no', 'kind', 'reportedBy', 'reportedAt','status', 'actions','assignedTo','adminApproval']"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+<div class="problems">
 <h2>Problems reported</h2>
 <div *ngFor="let problem of problems$ | async">
     <!-- Display problem kind details here -->
@@ -67,13 +154,13 @@
   </ng-container>
 
   <ng-container matColumnDef="assignedTo">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>ASSIGNED TO</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ASSIGNED</th>
     <td mat-cell *matCellDef="let problem">
       <form [formGroup]="problemForm" #formRef="ngForm">
         <ng-container *ngIf="!problem.assignedTo">
           <select formControlName="assignedTo" (change)="onStaffSelectionChange(problem._id); formRef.ngSubmit.emit()">
             <option value="" disabled selected>Select Staff</option>
-            <option *ngFor="let staff of staffList" [value]="staff._id">{{ staff.name }}</option> 
+            <option *ngFor="let staff of staffList" [value]="staff._id">{{ staff.name }}</option>
           </select>
           <button type="submit" hidden class="hidden-button" [disabled]="true"></button>
         </ng-container>
@@ -83,7 +170,7 @@
       </form>
     </td>
   </ng-container>
-  
+
 
 
   <ng-container matColumnDef="delete">

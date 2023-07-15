@@ -42,7 +42,7 @@ main {
     padding: 20px 0;
     padding-right: 10px;
     padding-left: 10px;
-    height: auto;
+    height: 100vh;
     padding-top: 0 !important;
     background-color: white;
   }
@@ -86,7 +86,7 @@ main {
   .nav-list-icon {
     color: #00008B!important;
     margin-right: 10px;
-    font-size: 25px;
+    font-size: 28px;
     height: 30px;
     width: 30px;
     padding-top: 10px;
@@ -96,7 +96,7 @@ main {
     color: #00008B!important;
     padding: 0;
     margin: 0;
-    font-size: 16px;
+    font-size: 18px;
     padding-bottom: 12px;
     font-weight: bold;
     height: 20px;
@@ -113,6 +113,9 @@ main {
     }
   }
 
+  .nav-list-item{
+    padding-left:50px;
+  }
   .nav-list-item.active-link {
     background-color: #00008B
 
