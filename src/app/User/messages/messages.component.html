@@ -2,7 +2,7 @@
 
 <main>
   <div class="all">
-    <div *ngFor = "let messages of messages" class="one" (click)="displayMessage(messages)">
+    <div *ngFor = "let messages of messages" class="one" (click)="displayMessage(messages, messages._id)">
       <div class="image">
         <mat-icon>message</mat-icon>
       </div>
@@ -18,10 +18,11 @@
     <h4>{{selectedMessageHeader}}</h4>
     <p>{{ selectedMessageContent }}</p>
 
-  <form (submit)="sendReply()" class="reply">
+    <form class="reply" [formGroup]="replyForm" (ngSubmit)="sendReply()">
+      <input type="text" formControlName="reply" placeholder="Reply">
+      <button type="submit">Send</button>
+    </form>
 
-    <input type="text" [(ngModel)]="reply" placeholder="Reply">
-    <button (click)="sendReply()">Send</button>
-  </form>
+
   </div>
 </main>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../message.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-messages',
@@ -8,13 +9,20 @@ import { MessageService } from '../../message.service';
 })
 export class MessagesComponent implements OnInit {
   messages: any[] = [];
-  reply: any;
+  reply!: string;
+  messageId: any;
+  replyForm!: FormGroup;
 
-  constructor(private messageService: MessageService) {}
+  constructor(
+    private messageService: MessageService,
+    private formBuilder: FormBuilder
+    ) {}
 
   ngOnInit(): void {
     this.fetchMessages();
-    this.reply= '';
+    this.replyForm = this.formBuilder.group({
+      reply: ['']
+    });
   }
 
   fetchMessages(): void {
@@ -49,10 +57,12 @@ export class MessagesComponent implements OnInit {
   // }
   sendReply() {
     const userId = localStorage.getItem('uuid')?.toString()
-    const reply = this.reply
-    if(userId){
+    const reply = this.replyForm.value.reply;
+    const messageId = localStorage.getItem('messageId');
+    if(userId && messageId){
     this.messageService.postMessage(
       userId,
+      messageId,
       reply
     ).subscribe(
       (response) => {
@@ -68,8 +78,9 @@ export class MessagesComponent implements OnInit {
   selectedMessageContent: string = '';
   selectedMessageHeader: string = '';
 
-  displayMessage(messages: any): void {
+  displayMessage(messages: any, messageId: any): void {
     this.selectedMessageContent = messages.content;
     this.selectedMessageHeader = messages.header;
+    localStorage.setItem('messageId', messageId);
   }
 }

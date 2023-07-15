@@ -24,6 +24,7 @@ import { UserAnouncementComponent } from './User/user-anouncements/user-anouncem
 import { UserAccountComponent } from './User/user-account/user-account.component';
 import { MapComponent } from './User/map/map.component';
 import { ChangePasswordComponent } from './Staff/change-password/change-password.component';
+import { StaffAccountComponent } from './Staff/staff-account/staff-account.component';
 
 const routes: Routes = [
    { path: 'login', component: LoginComponent },
@@ -73,7 +74,7 @@ const routes: Routes = [
      children: [
       { path: 'problem', component: StaffProblemsComponent},
       { path: 'problem/:id', component: StaffSingleProblemComponent},
-      { path: 'problem/staff-accout/ component: StaffAccountComponent'},
+      { path: 'staff-account', component: StaffAccountComponent},
       { path: '', redirectTo: 'problem', pathMatch: 'full'}
      ]
     },
