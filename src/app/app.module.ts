@@ -62,6 +62,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder,  Validators } from '@angular/forms';
 import { MapComponent } from './User/map/map.component';
 import { ChangePasswordComponent } from './Staff/change-password/change-password.component';
+import { StaffAccountComponent } from './Staff/staff-account/staff-account.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { ChangePasswordComponent } from './Staff/change-password/change-password
     UserAccountComponent,
     ChangePasswrordDialogComponent,
     MapComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    StaffAccountComponent
   ],
   imports: [
     FormsModule,

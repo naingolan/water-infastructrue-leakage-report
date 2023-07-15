@@ -1,0 +1,50 @@
+<main>
+  <div class="first">
+    <div class="user">
+      <h2>User Profile Info</h2>
+      <mat-icon>person</mat-icon>
+    </div>
+  </div>
+  <div class="second">
+    <div class="user">
+      <label>Name</label>
+      <p>{{user.user.name}}</p>
+      <div class="edit">
+        <!-- <button mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button> -->
+      </div>
+    </div>
+
+    <div class="user">
+      <label>Email</label>
+      <p>{{user.user.email}}</p>
+      <div class="edit">
+        <!-- <button mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button> -->
+      </div> 
+    </div>
+
+    <div class="user">
+      <label>Phone</label>
+      <p>{{user.user.phoneNumber}}</p>
+      <div class="edit">
+        <!-- <button mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button> -->
+      </div>
+    </div>
+
+<div class="user">
+      <label>Manage Passwords</label>
+      <p></p>
+      <div class="edit">
+        <button mat-icon-button (click)="openChangePasswordDialog()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  </main>
+

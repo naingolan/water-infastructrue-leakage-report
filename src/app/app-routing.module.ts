@@ -73,6 +73,7 @@ const routes: Routes = [
      children: [
       { path: 'problem', component: StaffProblemsComponent},
       { path: 'problem/:id', component: StaffSingleProblemComponent},
+      { path: 'problem/staff-accout/ component: StaffAccountComponent'},
       { path: '', redirectTo: 'problem', pathMatch: 'full'}
      ]
     },
