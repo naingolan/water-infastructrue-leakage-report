@@ -27,4 +27,12 @@ export class MessageService {
     return this.http.put(url, body);
   }
 
+  fetchReplies(): Observable<any> {
+    const url = 'http://localhost:3000/api/messages/replies';
+    return this.http.get(url);
+  }
+  
+
+
+
 }

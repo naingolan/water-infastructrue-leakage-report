@@ -1,0 +1,28 @@
+<h2>Messages</h2>
+
+<main>
+  <div class="all">
+    <div *ngFor = "let messages of messages" class="one" (click)="displayMessage(messages, messages._id)">
+      <div class="image">
+        <mat-icon>message</mat-icon>
+      </div>
+      <div class="content">
+        <h4>{{messages.header}}</h4>
+        <h4>{{messages.createdAt | date:'EEEE, MMMM d YYYY HH:mm' }}</h4>
+      </div>
+    </div>
+
+  </div>
+  <div class="line"></div>
+  <div class="single">
+    <h4>{{selectedMessageHeader}}</h4>
+    <p>{{ selectedMessageContent }}</p>
+
+    <form class="reply" [formGroup]="replyForm" (ngSubmit)="sendReply()">
+      <input type="text" formControlName="reply" placeholder="Reply">
+      <button type="submit">Send</button>
+    </form>
+
+
+  </div>
+</main>

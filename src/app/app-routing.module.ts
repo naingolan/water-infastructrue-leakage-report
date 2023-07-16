@@ -26,6 +26,7 @@ import { MapComponent } from './User/map/map.component';
 import { ChangePasswordComponent } from './Staff/change-password/change-password.component';
 import { StaffAccountComponent } from './Staff/staff-account/staff-account.component';
 import { UsersListComponent } from './Admin/users-list/users-list.component';
+import { AdminMessagesComponent } from './Admin/admin-messages/admin-messages.component';
 
 const routes: Routes = [
    { path: 'login', component: LoginComponent },
@@ -66,6 +67,7 @@ const routes: Routes = [
       { path: 'anouncement', component: AnouncementComponent},
       { path: 'staff-list', component: StaffListComponent},
       { path: 'users', component: UsersListComponent },
+      { path: 'message', component: AdminMessagesComponent },
       { path: '', redirectTo: 'problem', pathMatch: 'full'}
     ]
     },

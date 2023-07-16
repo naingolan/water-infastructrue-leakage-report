@@ -64,4 +64,5 @@ export class UserService {
     const url = `${this.apiUrl}/${userId}`;
     return this.http.delete(url);
   }
+  
 }

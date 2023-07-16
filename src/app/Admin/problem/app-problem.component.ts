@@ -246,7 +246,7 @@ export class AdminHomeDisplayComponent implements OnInit {
 
   viewProblem(problemId: string): void {
     console.log("I've been clicked");
-    this.router.navigate(['user/problem', problemId]);
+    this.router.navigate(['admin/problem', problemId]);
   }
 
 

@@ -64,6 +64,7 @@ import { MapComponent } from './User/map/map.component';
 import { ChangePasswordComponent } from './Staff/change-password/change-password.component';
 import { StaffAccountComponent } from './Staff/staff-account/staff-account.component';
 import { UsersListComponent } from './Admin/users-list/users-list.component';
+import { AdminMessagesComponent } from './Admin/admin-messages/admin-messages.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { UsersListComponent } from './Admin/users-list/users-list.component';
     MapComponent,
     ChangePasswordComponent,
     StaffAccountComponent,
-    UsersListComponent
+    UsersListComponent,
+    AdminMessagesComponent
   ],
   imports: [
     FormsModule,
