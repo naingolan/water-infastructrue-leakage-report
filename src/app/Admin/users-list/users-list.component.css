@@ -1,0 +1,81 @@
+table, thead,tbody{
+  background-color: white;;
+}
+thead
+{
+  box-shadow: var(box-shadow);
+  height:40px;
+  color:var(--color);
+}
+table{
+  width:80%;
+
+}
+tr{
+  border:1px solid black;
+}
+.action{
+  display: flex;
+  flex-direction:row;
+}
+.action>*{
+  margin:0 10px;
+}
+
+
+form{
+  width:80%;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  padding:20px;
+  border-radius: 20px;
+
+}
+form>div{
+  width:inherit;
+  display: flex;
+  flex-direction: column;
+}
+input,select{
+  width:auto;
+  border:1px solid var(--color);
+  border-radius: 20px;
+  height: 40px;
+}
+.reg{
+  width:200px;
+  height: 40px;
+  background-color: var(--color);
+  border-radius: 20px;
+  border:none;
+  color:white;
+  font-size:medium;
+  flex-direction: flex-end;
+  align-self:flex-end;
+  margin:20px 0;
+}
+h2{
+  font-size:medium;
+  color:var(--color);
+}
+
+mat-icon{
+  background-color: white;
+}
+.action>*{
+  background-color: white;
+  border:none;
+}
+.action>*>mat-icon:nth-child(1){
+  color:var(--color);
+}
+mat-icon:nth-child(2){
+  color:var(--color);
+}
+
+.table{
+  background-color: white;
+  padding:20px;
+  border-radius: 20px;
+  box-shadow: var(--box-shadow);
+}

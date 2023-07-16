@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StaffService } from '../../staff.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-staff-list',
@@ -11,12 +12,15 @@ export class StaffListComponent implements OnInit {
   staffList: any[] = [];
   newStaff: any = {};
   integer: number = 1;
-  displayedColumns: string[] = ['no', 'name', 'email', 'phoneNumber'];
+  displayedColumns: string[] = ['no', 'name', 'email', 'phoneNumber', 'actions'];
   formErrors: any;
   dataSource = new MatTableDataSource<any>([])
 
 
-  constructor(private staffService: StaffService) {}
+  constructor(
+    private staffService: StaffService,
+    private userService: UserService
+    ) {}
 
   ngOnInit(): void {
     this.loadStaffList();
@@ -35,6 +39,19 @@ export class StaffListComponent implements OnInit {
       }
     );
   }
+
+  deleteUser(id: string): void {
+    this.userService.deleteUser(id).subscribe(
+      (response) => {
+        console.log('User deleted successfully:', response);
+        this.loadStaffList();
+      } ,
+      (error) => {
+        console.log('Error deleting user:', error);
+      }
+    );
+    }
+
 
   createStaff(): void {
     // Set default values for password and role

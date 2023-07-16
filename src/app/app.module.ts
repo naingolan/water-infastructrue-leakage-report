@@ -63,6 +63,7 @@ import { FormBuilder,  Validators } from '@angular/forms';
 import { MapComponent } from './User/map/map.component';
 import { ChangePasswordComponent } from './Staff/change-password/change-password.component';
 import { StaffAccountComponent } from './Staff/staff-account/staff-account.component';
+import { UsersListComponent } from './Admin/users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { StaffAccountComponent } from './Staff/staff-account/staff-account.compo
     ChangePasswrordDialogComponent,
     MapComponent,
     ChangePasswordComponent,
-    StaffAccountComponent
+    StaffAccountComponent,
+    UsersListComponent
   ],
   imports: [
     FormsModule,

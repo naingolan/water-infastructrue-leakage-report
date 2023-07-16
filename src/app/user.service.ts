@@ -53,4 +53,15 @@ export class UserService {
     return this.http.patch(url, payload);
   }
 
+
+  // Get all userws
+  getAllUsers(): Observable<any> {
+    return this.http.get(this.apiUrl);
+  }
+
+  // Delete user
+  deleteUser(userId: string): Observable<any> {
+    const url = `${this.apiUrl}/${userId}`;
+    return this.http.delete(url);
+  }
 }

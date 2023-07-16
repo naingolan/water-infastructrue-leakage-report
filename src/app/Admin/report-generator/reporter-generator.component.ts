@@ -20,7 +20,7 @@ export class ReportGeneratorComponent implements OnInit {
   selectedReportType: string = 'daily';
   filteredProblems: any[] = [];
   problemsDataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-  displayedColumns: string[] = ['No', 'name','reportedBy', 'createdAt', 'status'];
+  displayedColumns: string[] = ['No', 'name','reportedBy', 'createdAt', 'createdTime', 'status'];
 
   @ViewChild('table') table!: ElementRef;
   @ViewChild(MatSort) sort!: MatSort;
@@ -85,15 +85,15 @@ export class ReportGeneratorComponent implements OnInit {
     const endOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (6 - today.getDay()));
     return problemDate >= startOfWeek && problemDate <= endOfWeek;
   }
-  
+
 
   isProblemCreatedThisMonth(createdAt: string): boolean {
     const today = new Date();
     const problemDate = new Date(createdAt);
-  
+
     return problemDate.getMonth() === today.getMonth() && problemDate.getFullYear() === today.getFullYear();
   }
-  
+
 
   generatePDF(): void {
     const doc = new jsPDF();
